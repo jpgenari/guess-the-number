@@ -7,6 +7,25 @@ def clear():
     '''
     os.system('cls' if os.name == 'nt'else 'clear')
 
+def welcome_message():
+    '''
+    Prints the welcome message to the users when starting the 
+    program
+    '''
+    print()
+    print()
+    print()
+    print()
+    print()
+    print('                 --- Welcome to ... ----')
+    print()
+    print()
+    print('             G U E S S   T H E   N U M B E R')
+    print()
+    print()
+    print()
+    print()
+
 def instructions():
     '''
     Provides option to the users either view instructions before
@@ -43,4 +62,13 @@ def instructions():
             print()
             back = input('                       Press ENTER to proceed: ')
 
-instructions()
+
+def main():
+    '''
+    Runs the program outside game loop
+    '''
+    clear()
+    welcome_message()
+    instructions()
+
+main()
