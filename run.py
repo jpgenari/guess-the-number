@@ -103,6 +103,13 @@ def get_guessed_number(guess_range):
 
         print(guess)
 
+def get_score(guesses_allowed, user_level):
+    if user_level == 1:
+        score = guesses_allowed * 5
+    else:
+        score = guesses_allowed * 5
+    print(score)
+
 def game_loop(number, guess_range):
     '''
     Runs the whole game.
@@ -121,6 +128,7 @@ def game_loop(number, guess_range):
         guess = get_guessed_number(guess_range)
         if guess == number:
             print('Winner')
+            get_score(guesses_allowed, user_level)
             break
         else:
             if guess in incorrect_guesses:
