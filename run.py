@@ -20,12 +20,12 @@ def instructions():
 
     while True:
         instructions = input('Do you want to check the instructions? Y/N: ').lower()
-        clear()
+        # clear()
         if instructions == 'y':
-            clear()
+            # clear()
             messages.instructions_message()
             back = input('                       Press ENTER to proceed: ')
-            clear()
+            # clear()
             break
         elif instructions == 'n':
             break
@@ -47,7 +47,7 @@ def user_level_choice():
     while True:
         print()
         game_level = input('Enter 1 for easy or 2 for hard level: ')
-        clear()
+        # clear()
 
         try:
             game_level = int(game_level)
@@ -61,15 +61,39 @@ def user_level_choice():
         else:
             messages.welcome_message()
             print('Number outside the allowed range.')
+    
+    # clear()
+
+def get_random_number(user_level):
+    '''
+    Picks a random number to be guessed based on the user 
+    level option
+    '''
+    if user_level == 1:
+        guess_range = 50
+        guesses_allowed = 20
+    elif user_level == 2:
+        guess_range = 100
+        guesses_allowed = 20
+
+    number = random.randint(1, guess_range)
+    
+    print(number)
+
+
+
+
         
 def main():
     '''
     Runs the program outside game loop
     '''
-    clear()
+    # clear()
     messages.welcome_message()
     instructions()
     messages.welcome_message()
     user_level = user_level_choice()
+    # clear()
+    number = get_random_number(user_level)
 
 main()
