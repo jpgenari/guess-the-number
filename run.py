@@ -71,16 +71,39 @@ def get_random_number(user_level):
     '''
     if user_level == 1:
         guess_range = 50
-        guesses_allowed = 20
     elif user_level == 2:
         guess_range = 100
-        guesses_allowed = 20
 
     number = random.randint(1, guess_range)
-    
+    guesses_allowed = 20
+
     print(number)
 
+    return number, guess_range
 
+def get_guessed_number(guess_range):
+    '''
+    Gets user guessed number and validate it, otherwise
+    user will see an error message if number is out of 
+    guess range and not a number
+    '''
+    while True:
+        print()
+        user_input = input('Guess a number between 1 and ' + str(guess_range) + ': ')
+        clear()
+
+        try:
+            guess = int(user_input)
+        except ValueError:
+            print('Numbers only!')
+            continue
+        if 1 <= guess <= guess_range:
+            return guess
+            break
+        else:
+            print(str(user_input) +' is outside the allowed range (1 - ' + str(guess_range) + ')')
+
+        print(guess)
 
 
         
@@ -94,6 +117,7 @@ def main():
     messages.welcome_message()
     user_level = user_level_choice()
     # clear()
-    number = get_random_number(user_level)
+    number, guess_range = get_random_number(user_level)
+    guess = get_guessed_number(guess_range)
 
 main()
