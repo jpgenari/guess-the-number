@@ -70,12 +70,11 @@ def get_random_number(user_level):
     level option
     '''
     if user_level == 1:
-        guess_range = 50
+        guess_range = 30
     elif user_level == 2:
-        guess_range = 100
+        guess_range = 60
 
     number = random.randint(1, guess_range)
-    guesses_allowed = 20
 
     print(number)
 
@@ -90,8 +89,7 @@ def get_guessed_number(guess_range):
     while True:
         print()
         user_input = input('Guess a number between 1 and ' + str(guess_range) + ': ')
-        clear()
-
+        
         try:
             guess = int(user_input)
         except ValueError:
@@ -105,8 +103,48 @@ def get_guessed_number(guess_range):
 
         print(guess)
 
+def game_loop(number, guess_range):
+    '''
+    Runs the whole game.
+    Gets the random generated number and the users guessed number
+    and checks winner condition.
+    Sets the number of guesses allowed which will determine how 
+    long the game will run.
+    Displays to user numbers already guessed and checks if user is 
+    repeating a number - not allowing repeated numbers.
+    '''
+    guesses_allowed = 10
+    incorrect_guesses = []
 
-        
+    while guesses_allowed > 0:
+        print(guesses_allowed)
+        guess = get_guessed_number(guess_range)
+        if guess == number:
+            print('Winner')
+            break
+        else:
+            if guess in incorrect_guesses:
+                print('You have tried this number already! Try again')
+                continue
+            else:
+                guesses_allowed -= 1
+                incorrect_guesses.append(guess)
+                print(f'You have tried do far: {incorrect_guesses}')
+                if guesses_allowed == 0:
+                    print()
+                else:
+                    if abs(number - guess) <= 5:
+                        print("You're warm!")
+                    elif abs(number - guess) <= 10:
+                        print("You're getting warmer.")
+                    elif abs(number - guess) <= 20:
+                        print("You're cold.")
+                    else:
+                        print("You're freezing.")
+    else:
+        print("You lose")
+
+
 def main():
     '''
     Runs the program outside game loop
@@ -118,6 +156,7 @@ def main():
     user_level = user_level_choice()
     # clear()
     number, guess_range = get_random_number(user_level)
-    guess = get_guessed_number(guess_range)
+    # guess = get_guessed_number(guess_range)
+    game_loop(number, guess_range)
 
 main()
