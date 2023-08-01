@@ -76,7 +76,7 @@ def get_random_number(user_level):
 
     number = random.randint(1, guess_range)
 
-    print(number)
+    # print(number)
 
     return number, guess_range
 
@@ -107,10 +107,11 @@ def get_score(guesses_allowed, user_level):
     if user_level == 1:
         score = guesses_allowed * 5
     else:
-        score = guesses_allowed * 5
-    print(score)
+        score = guesses_allowed * 10
+    
+    return score
 
-def game_loop(number, guess_range):
+def game_loop(number, guess_range, user_level):
     '''
     Runs the whole game.
     Gets the random generated number and the users guessed number
@@ -128,7 +129,7 @@ def game_loop(number, guess_range):
         guess = get_guessed_number(guess_range)
         if guess == number:
             print('Winner')
-            get_score(guesses_allowed, user_level)
+            print(get_score(guesses_allowed, user_level))
             break
         else:
             if guess in incorrect_guesses:
@@ -165,6 +166,6 @@ def main():
     # clear()
     number, guess_range = get_random_number(user_level)
     # guess = get_guessed_number(guess_range)
-    game_loop(number, guess_range)
+    game_loop(number, guess_range, user_level)
 
 main()
