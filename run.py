@@ -1,30 +1,12 @@
 import random
 import os
+import messages
 
 def clear():
     '''
     Clears the terminal when needed
     '''
     os.system('cls' if os.name == 'nt'else 'clear')
-
-def welcome_message():
-    '''
-    Prints the welcome message to the users when starting the 
-    program
-    '''
-    print()
-    print()
-    print()
-    print()
-    print()
-    print('                 --- Welcome to ... ----')
-    print()
-    print()
-    print('             G U E S S   T H E   N U M B E R')
-    print()
-    print()
-    print()
-    print()
 
 def instructions():
     '''
@@ -41,30 +23,14 @@ def instructions():
         clear()
         if instructions == 'y':
             clear()
-            print()
-            print()
-            print('                       Guess the hidden number!')
-            print('              The aim of this game is to guess the number')
-            print('             and have as few incorrect guesses as possible,')
-            print('          you have 3 guesses, after each incorrect one you will')
-            print('                          receive a hint!')
-            print()
-            print('      Be aware, the fewer incorrect guesses, the higher your score:')
-            print('      1st guess: 500 pts, 2nd guess: 300 pts, 3rd guess: 100 pts and')
-            print('             with 4th guess: well, you lose! The points will')
-            print('         sum up through the rounds and you can log them at the end!')
-            print()
-            print('                              Good look!')
-            print()
-            print()
-            print()
+            messages.instructions_message()
             back = input('                       Press ENTER to proceed: ')
             clear()
             break
         elif instructions == 'n':
             break
         else:
-            welcome_message()
+            messages.welcome_message()
             print()
             print('Incorrect entry, you should either pick [Y]es or [N]o')
             print()
@@ -86,14 +52,14 @@ def user_level_choice():
         try:
             game_level = int(game_level)
         except ValueError:
-            welcome_message()
+            messages.welcome_message()
             print('Numbers only!')
             continue
         if 1 <= game_level <= 2:
             return game_level
             break
         else:
-            welcome_message()
+            messages.welcome_message()
             print('Number outside the allowed range.')
         
 def main():
@@ -101,9 +67,9 @@ def main():
     Runs the program outside game loop
     '''
     clear()
-    welcome_message()
+    messages.welcome_message()
     instructions()
-    welcome_message()
+    messages.welcome_message()
     user_level = user_level_choice()
 
 main()
