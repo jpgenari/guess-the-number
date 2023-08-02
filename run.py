@@ -1,5 +1,6 @@
 import random
 import os
+import sys
 import messages
 
 def clear():
@@ -103,6 +104,29 @@ def get_guessed_number(guess_range):
 
         print(guess)
 
+def play_again_or_exit():
+    '''
+    Provide an option for user to play again and
+    also validate user input
+    '''
+    while True:
+
+        play_again = input('Press 1, if you want to start again or 2 to exit: ')
+
+        try:
+            play_again = int(play_again)
+        except ValueError:
+            print('Incorrect input, only 1 or 2 are accepted, try again')
+            continue
+        if play_again == 1:
+            main()
+            break
+        elif play_again == 2:
+            clear()
+            sys.exit("You've left the game")
+        else:
+            print('Invalid number, only 1 or 2 are accepted')
+
 def get_score(guesses_allowed, user_level):
     if user_level == 1:
         score = guesses_allowed * 5
@@ -130,6 +154,7 @@ def game_loop(number, guess_range, user_level):
         if guess == number:
             print('Winner')
             print(get_score(guesses_allowed, user_level))
+            play_again_or_exit()
             break
         else:
             if guess in incorrect_guesses:
@@ -152,6 +177,7 @@ def game_loop(number, guess_range, user_level):
                         print("You're freezing.")
     else:
         print("You lose")
+        play_again_or_exit()
 
 
 def main():
