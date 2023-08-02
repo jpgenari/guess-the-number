@@ -16,8 +16,6 @@ import random
 import os
 import sys
 import pandas as pd
-import xlrd
-from collections import defaultdict
 
 import messages
 
@@ -46,12 +44,12 @@ def show_instructions():
 
     while True:
         instructions = input('Do you want to check the instructions? Y/N: ').lower()
-        # clear()
+        clear()
         if instructions == 'y':
-            # clear()
+            clear()
             messages.instructions_message()
             back = input('                       Press ENTER to proceed: ')
-            # clear()
+            clear()
             break
         elif instructions == 'n':
             break
@@ -72,7 +70,7 @@ def user_level_choice():
     while True:
         print()
         game_level = input('Enter 1 for easy or 2 for hard level: ')
-        # clear()
+        clear()
 
         try:
             game_level = int(game_level)
@@ -100,7 +98,6 @@ def generate_random_number(user_level):
 
     number = random.randint(1, guess_range)
 
-    2
     print(number)
 
     return number, guess_range
@@ -120,6 +117,7 @@ def user_guessed_number(guess_range):
             print('Numbers only!')
             continue
         if 1 <= guess <= guess_range:
+            clear()
             return guess
             break
         else:
@@ -200,7 +198,7 @@ def display_results():
     top_5 = df.head(5)
 
     print(top_5.to_string(index=False))
-    # play_again_or_exit()
+    play_again_or_exit()
 
 display_results()
 
@@ -219,7 +217,7 @@ def game_loop(number, guess_range, user_level):
     incorrect_guesses = []
 
     while guesses_allowed > 0:
-        print(guesses_allowed)
+        print(f'You have a total of {guesses_allowed} remaining guesses')
         guess = user_guessed_number(guess_range)
         if guess == number:
             print('Winner')
@@ -239,9 +237,9 @@ def game_loop(number, guess_range, user_level):
                     print()
                 else:
                     if abs(number - guess) <= 5:
-                        print("You're warm!")
+                        print("You're getting warmer!!!")
                     elif abs(number - guess) <= 10:
-                        print("You're getting warmer.")
+                        print("You're warm!")
                     elif abs(number - guess) <= 20:
                         print("You're cold.")
                     else:
@@ -255,12 +253,12 @@ def main():
     '''
     Runs the program outside game loop
     '''
-    # clear()
+    clear()
     messages.welcome_message()
     show_instructions()
     messages.welcome_message()
     user_level = user_level_choice()
-    # clear()
+    clear()
     number, guess_range = generate_random_number(user_level)
     game_loop(number, guess_range, user_level)
 
