@@ -187,16 +187,19 @@ def display_results():
     '''
     Display results from previous players at the end of
     the game.
+    Creates a ranking showing users based on their scores in descending order (top scored at the top).
     '''
-    worksheet = SHEET.worksheet('results')
-    data = worksheet.get_all_values()
+    data = SHEET.worksheet('results').get_all_values()
     headers = data[0]
     rows = data[1:]
 
     df = pd.DataFrame(rows, columns=headers)
-    
+    df = df[['Player', 'Points']].sort_values(by='Points', ascending=False)
+
     print(df)
     play_again_or_exit()
+
+display_results()
 
 
 def game_loop(number, guess_range, user_level):
@@ -258,4 +261,4 @@ def main():
     number, guess_range = generate_random_number(user_level)
     game_loop(number, guess_range, user_level)
 
-main()
+# main()
