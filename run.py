@@ -1,3 +1,4 @@
+
 import random
 import os
 import sys
@@ -9,7 +10,7 @@ def clear():
     '''
     os.system('cls' if os.name == 'nt'else 'clear')
 
-def instructions():
+def show_instructions():
     '''
     Provides option to the users either view instructions before
     the game or skip it going directly to play game. It also 
@@ -36,7 +37,6 @@ def instructions():
             print('Incorrect entry, you should either pick [Y]es or [N]o')
             print()
 
-
 def user_level_choice():
     '''
     Provides to the user the game level choice and get
@@ -62,10 +62,9 @@ def user_level_choice():
         else:
             messages.welcome_message()
             print('Number outside the allowed range.')
-    
     # clear()
 
-def get_random_number(user_level):
+def generate_random_number(user_level):
     '''
     Picks a random number to be guessed based on the user 
     level option
@@ -81,7 +80,7 @@ def get_random_number(user_level):
 
     return number, guess_range
 
-def get_guessed_number(guess_range):
+def user_guessed_number(guess_range):
     '''
     Gets user guessed number and validate it, otherwise
     user will see an error message if number is out of 
@@ -90,7 +89,6 @@ def get_guessed_number(guess_range):
     while True:
         print()
         user_input = input('Guess a number between 1 and ' + str(guess_range) + ': ')
-        
         try:
             guess = int(user_input)
         except ValueError:
@@ -104,13 +102,14 @@ def get_guessed_number(guess_range):
 
         print(guess)
 
+
+
 def play_again_or_exit():
     '''
     Provide an option for user to play again and
     also validate user input
     '''
     while True:
-
         play_again = input('Press 1, if you want to start again or 2 to exit: ')
 
         try:
@@ -128,11 +127,14 @@ def play_again_or_exit():
             print('Invalid number, only 1 or 2 are accepted')
 
 def get_score(guesses_allowed, user_level):
+    '''
+    Gets user score based on remaining allowed guesses and
+    user selected level
+    '''
     if user_level == 1:
         score = guesses_allowed * 5
     else:
         score = guesses_allowed * 10
-    
     return score
 
 def game_loop(number, guess_range, user_level):
@@ -150,7 +152,7 @@ def game_loop(number, guess_range, user_level):
 
     while guesses_allowed > 0:
         print(guesses_allowed)
-        guess = get_guessed_number(guess_range)
+        guess = user_guessed_number(guess_range)
         if guess == number:
             print('Winner')
             print(get_score(guesses_allowed, user_level))
@@ -186,12 +188,12 @@ def main():
     '''
     # clear()
     messages.welcome_message()
-    instructions()
+    show_instructions()
     messages.welcome_message()
     user_level = user_level_choice()
     # clear()
-    number, guess_range = get_random_number(user_level)
-    # guess = get_guessed_number(guess_range)
+    number, guess_range = generate_random_number(user_level)
+    # guess = user_guessed_number(guess_range)
     game_loop(number, guess_range, user_level)
 
 main()
