@@ -188,6 +188,7 @@ def display_results():
     Display results from previous players at the end of
     the game.
     Creates a ranking showing users based on their scores in descending order (top scored at the top).
+    Displays only the top 5 scorers.
     '''
     data = SHEET.worksheet('results').get_all_values()
     headers = data[0]
@@ -196,8 +197,10 @@ def display_results():
     df = pd.DataFrame(rows, columns=headers)
     df = df[['Player', 'Points']].sort_values(by='Points', ascending=False)
 
-    print(df)
-    play_again_or_exit()
+    top_5 = df.head(5)
+
+    print(top_5.to_string(index=False))
+    # play_again_or_exit()
 
 display_results()
 
