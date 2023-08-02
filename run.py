@@ -117,7 +117,6 @@ def user_name():
             play_again_or_exit()
             return user_name
 
-
 def play_again_or_exit():
     '''
     Provide an option for user to play again and
