@@ -15,6 +15,10 @@ SHEET = GSPREAD_CLIENT.open('guess-the-number')
 import random
 import os
 import sys
+import pandas as pd
+import xlrd
+from collections import defaultdict
+
 import messages
 
 def update_worksheet(data, worksheet):
@@ -96,7 +100,8 @@ def generate_random_number(user_level):
 
     number = random.randint(1, guess_range)
 
-    # print(number)
+    2
+    print(number)
 
     return number, guess_range
 
@@ -167,7 +172,6 @@ def user_name(score):
             print('Name / username should be 2 to 10 characters')
         else:
             update_results(user_name, score)
-            play_again_or_exit()
             return user_name
         
 def update_results(user_name, score):
@@ -177,6 +181,23 @@ def update_results(user_name, score):
     '''
     data = [user_name, score]
     update_worksheet(data, 'results')
+    display_results()
+
+def display_results():
+    '''
+    Display results from previous players at the end of
+    the game.
+    '''
+    worksheet = SHEET.worksheet('results')
+    data = worksheet.get_all_values()
+    headers = data[0]
+    rows = data[1:]
+
+    df = pd.DataFrame(rows, columns=headers)
+    
+    print(df)
+    play_again_or_exit()
+
 
 def game_loop(number, guess_range, user_level):
     '''
