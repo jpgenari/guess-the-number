@@ -102,6 +102,20 @@ def user_guessed_number(guess_range):
 
         print(guess)
 
+def user_name():
+    '''
+    Gets user name or nickname to be logged to the game history
+    '''
+    while True:
+        print()
+        user_name = input('Please enter your name or nickname\n')
+
+        if len(user_name) <= 1 or len(user_name) >= 11:
+            print('Name / username should be 2 to 10 characters')
+        else:
+            print(f'Thank you for playing {user_name} !')
+            play_again_or_exit()
+            return user_name
 
 
 def play_again_or_exit():
@@ -156,7 +170,7 @@ def game_loop(number, guess_range, user_level):
         if guess == number:
             print('Winner')
             print(get_score(guesses_allowed, user_level))
-            play_again_or_exit()
+            user_name()
             break
         else:
             if guess in incorrect_guesses:
@@ -179,7 +193,7 @@ def game_loop(number, guess_range, user_level):
                         print("You're freezing.")
     else:
         print("You lose")
-        play_again_or_exit()
+        user_name()
 
 
 def main():
