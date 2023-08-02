@@ -155,7 +155,7 @@ def calculate_score(guesses_allowed, user_level):
         score = guesses_allowed * 10
     return score
 
-def user_name(score=None):
+def user_name(score):
     '''
     Gets user name or nickname to be logged to the game history
     '''
@@ -171,6 +171,10 @@ def user_name(score=None):
             return user_name
         
 def update_results(user_name, score):
+    '''
+    Gets both username and score and add to list data which 
+    is then pushed to the worksheet results.
+    '''
     data = [user_name, score]
     update_worksheet(data, 'results')
 
@@ -194,7 +198,7 @@ def game_loop(number, guess_range, user_level):
             print('Winner')
             score = (calculate_score(guesses_allowed, user_level))
             print(score)
-            user_name()
+            user_name(score)
             break
         else:
             if guess in incorrect_guesses:
