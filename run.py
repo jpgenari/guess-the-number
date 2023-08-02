@@ -12,17 +12,17 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('guess-the-number')
 
-ranking = SHEET.worksheet('data')
-
-data = ranking.get_all_values()
-
-print(data)
-
 import random
 import os
 import sys
-
 import messages
+
+def update_worksheet(data, worksheet):
+    """
+    Updates the worksheet with the username and scores
+    """
+    worksheet_to_update = SHEET.worksheet(worksheet)
+    worksheet_to_update.append_row(data)
 
 def clear():
     '''
@@ -122,21 +122,6 @@ def user_guessed_number(guess_range):
 
         print(guess)
 
-def user_name():
-    '''
-    Gets user name or nickname to be logged to the game history
-    '''
-    while True:
-        print()
-        user_name = input('Please enter your name or nickname\n')
-
-        if len(user_name) <= 1 or len(user_name) >= 11:
-            print('Name / username should be 2 to 10 characters')
-        else:
-            print(f'Thank you for playing {user_name} !')
-            play_again_or_exit()
-            return user_name
-
 def play_again_or_exit():
     '''
     Provide an option for user to play again and
@@ -155,11 +140,11 @@ def play_again_or_exit():
             break
         elif play_again == 2:
             clear()
-            sys.exit("You've left the game")
+            sys.exit("Thank you for playing! You've left the game")
         else:
             print('Invalid number, only 1 or 2 are accepted')
 
-def get_score(guesses_allowed, user_level):
+def calculate_score(guesses_allowed, user_level):
     '''
     Gets user score based on remaining allowed guesses and
     user selected level
@@ -169,6 +154,25 @@ def get_score(guesses_allowed, user_level):
     else:
         score = guesses_allowed * 10
     return score
+
+def user_name(score=None):
+    '''
+    Gets user name or nickname to be logged to the game history
+    '''
+    while True:
+        print()
+        user_name = input('Please enter your name or nickname\n')
+
+        if len(user_name) <= 1 or len(user_name) >= 11:
+            print('Name / username should be 2 to 10 characters')
+        else:
+            update_results(user_name, score)
+            play_again_or_exit()
+            return user_name
+        
+def update_results(user_name, score):
+    data = [user_name, score]
+    update_worksheet(data, 'results')
 
 def game_loop(number, guess_range, user_level):
     '''
@@ -188,7 +192,8 @@ def game_loop(number, guess_range, user_level):
         guess = user_guessed_number(guess_range)
         if guess == number:
             print('Winner')
-            print(get_score(guesses_allowed, user_level))
+            score = (calculate_score(guesses_allowed, user_level))
+            print(score)
             user_name()
             break
         else:
@@ -212,7 +217,7 @@ def game_loop(number, guess_range, user_level):
                         print("You're freezing.")
     else:
         print("You lose")
-        user_name()
+        play_again_or_exit()
 
 
 def main():
@@ -226,7 +231,6 @@ def main():
     user_level = user_level_choice()
     # clear()
     number, guess_range = generate_random_number(user_level)
-    # guess = user_guessed_number(guess_range)
     game_loop(number, guess_range, user_level)
 
-# main()
+main()
