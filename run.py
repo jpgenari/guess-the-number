@@ -98,11 +98,11 @@ def generate_random_number(user_level):
 
     number = random.randint(1, guess_range)
 
-    print(number)
+    # print(number)
 
     return number, guess_range
 
-def user_guessed_number(guess_range):
+def user_guessed_number(guess_range, incorrect_guesses):
     '''
     Gets user guessed number and validate it, otherwise
     user will see an error message if number is out of 
@@ -114,6 +114,9 @@ def user_guessed_number(guess_range):
         try:
             guess = int(user_input)
         except ValueError:
+            clear()
+            print(f'Tried numbers: {incorrect_guesses}')
+            print()
             print('Numbers only!')
             continue
         if 1 <= guess <= guess_range:
@@ -121,9 +124,12 @@ def user_guessed_number(guess_range):
             return guess
             break
         else:
+            clear()
+            print(f'Tried numbers: {incorrect_guesses}')
+            print()
             print(str(user_input) +' is outside the allowed range (1 - ' + str(guess_range) + ')')
 
-        print(guess)
+        # print(guess)
 
 def play_again_or_exit():
     '''
@@ -153,9 +159,9 @@ def calculate_score(guesses_allowed, user_level):
     user selected level
     '''
     if user_level == 1:
-        score = guesses_allowed * 5
+        score = guesses_allowed * 4
     else:
-        score = guesses_allowed * 10
+        score = guesses_allowed * 8
     return score
 
 def user_name(score):
@@ -197,10 +203,12 @@ def display_results():
 
     top_5 = df.head(5)
 
+    print()
+    print('Check our all time ranking!')
+    print()
     print(top_5.to_string(index=False))
+    print()
     play_again_or_exit()
-
-display_results()
 
 
 def game_loop(number, guess_range, user_level):
@@ -217,35 +225,44 @@ def game_loop(number, guess_range, user_level):
     incorrect_guesses = []
 
     while guesses_allowed > 0:
-        print(f'You have a total of {guesses_allowed} remaining guesses')
-        guess = user_guessed_number(guess_range)
+        print(f'{guesses_allowed} remaining guesses')
+        guess = user_guessed_number(guess_range, incorrect_guesses)
         if guess == number:
             print('Winner')
+            print()
             score = (calculate_score(guesses_allowed, user_level))
-            print(score)
+            print(f'You scored {score} points, well done!')
             user_name(score)
             break
         else:
             if guess in incorrect_guesses:
+                print(f'Tried numbers: {incorrect_guesses}')
+                print()
                 print('You have tried this number already! Try again')
+                print()
                 continue
             else:
                 guesses_allowed -= 1
                 incorrect_guesses.append(guess)
-                print(f'You have tried do far: {incorrect_guesses}')
+                print(f'Tried numbers: {incorrect_guesses}')
+                print()
                 if guesses_allowed == 0:
+                    print("You lose! Wish you more luck next time.")
                     print()
                 else:
                     if abs(number - guess) <= 5:
                         print("You're getting warmer!!!")
+                        print()
                     elif abs(number - guess) <= 10:
                         print("You're warm!")
+                        print()
                     elif abs(number - guess) <= 20:
                         print("You're cold.")
+                        print()
                     else:
                         print("You're freezing.")
+                        print()
     else:
-        print("You lose")
         play_again_or_exit()
 
 
@@ -262,4 +279,4 @@ def main():
     number, guess_range = generate_random_number(user_level)
     game_loop(number, guess_range, user_level)
 
-# main()
+main()
