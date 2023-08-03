@@ -43,12 +43,12 @@ def show_instructions():
     print()
 
     while True:
-        instructions = input('Do you want to check the instructions? Y/N: ').lower()
+        instructions = input('Do you want to check the instructions? Y/N:\n').lower()
         clear()
         if instructions == 'y':
             clear()
             messages.instructions_message()
-            back = input('                       Press ENTER to proceed: ')
+            input('Press ENTER to proceed:\n')
             clear()
             break
         elif instructions == 'n':
@@ -69,7 +69,7 @@ def user_level_choice():
     '''
     while True:
         print()
-        game_level = input('Enter 1 for easy or 2 for hard level: ')
+        game_level = input('Enter 1 for easy or 2 for hard level:\n')
         clear()
 
         try:
@@ -80,7 +80,6 @@ def user_level_choice():
             continue
         if 1 <= game_level <= 2:
             return game_level
-            break
         else:
             messages.welcome_message()
             print('Number outside the allowed range.')
@@ -110,7 +109,7 @@ def user_guessed_number(guess_range, incorrect_guesses):
     '''
     while True:
         print()
-        user_input = input('Guess a number between 1 and ' + str(guess_range) + ': ')
+        user_input = input(f'Guess a number between 1 and {guess_range} :\n')
         try:
             guess = int(user_input)
         except ValueError:
@@ -122,12 +121,11 @@ def user_guessed_number(guess_range, incorrect_guesses):
         if 1 <= guess <= guess_range:
             clear()
             return guess
-            break
         else:
             clear()
             print(f'Tried numbers: {incorrect_guesses}')
             print()
-            print(str(user_input) +' is outside the allowed range (1 - ' + str(guess_range) + ')')
+            print(f'{user_input} is outside the allowed range > 1 - {guess_range}')
 
         # print(guess)
 
@@ -137,7 +135,7 @@ def play_again_or_exit():
     also validate user input
     '''
     while True:
-        play_again = input('Press 1, if you want to start again or 2 to exit: ')
+        play_again = input('Press 1, if you want to start again or 2 to exit:\n')
 
         try:
             play_again = int(play_again)
@@ -149,7 +147,7 @@ def play_again_or_exit():
             break
         elif play_again == 2:
             clear()
-            sys.exit("Thank you for playing! You've left the game")
+            sys.exit("You've left the game. Thank you for playing!")
         else:
             print('Invalid number, only 1 or 2 are accepted')
 
@@ -164,7 +162,7 @@ def calculate_score(guesses_allowed, user_level):
         score = guesses_allowed * 8
     return score
 
-def user_name(score):
+def pick_user_name(score):
     '''
     Gets user name or nickname to be logged to the game history
     '''
@@ -173,11 +171,11 @@ def user_name(score):
         user_name = input('Please enter your name or nickname\n')
 
         if len(user_name) <= 1 or len(user_name) >= 11:
-            print('Name / username should be 2 to 10 characters')
+            print('Name should be 2 to 10 characters')
         else:
             update_results(user_name, score)
             return user_name
-        
+
 def update_results(user_name, score):
     '''
     Gets both username and score and add to list data which 
@@ -232,7 +230,7 @@ def game_loop(number, guess_range, user_level):
             print()
             score = (calculate_score(guesses_allowed, user_level))
             print(f'You scored {score} points, well done!')
-            user_name(score)
+            pick_user_name(score)
             break
         else:
             if guess in incorrect_guesses:
