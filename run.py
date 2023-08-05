@@ -97,7 +97,7 @@ def generate_random_number(user_level):
 
     number = random.randint(1, guess_range)
 
-    # print(number)
+    print(f"Lucky number {number}")
 
     return number, guess_range
 
@@ -127,8 +127,6 @@ def user_guessed_number(guess_range, incorrect_guesses):
             print()
             print(f'{user_input} is outside the allowed range > 1 - {guess_range}')
 
-        # print(guess)
-
 def play_again_or_exit():
     '''
     Provide an option for user to play again and
@@ -140,7 +138,8 @@ def play_again_or_exit():
         try:
             play_again = int(play_again)
         except ValueError:
-            print('Incorrect input, only 1 or 2 are accepted, try again')
+            clear()
+            print('Incorrect input, only 1 or 2 are accepted, try again \n')
             continue
         if play_again == 1:
             main()
@@ -149,7 +148,8 @@ def play_again_or_exit():
             clear()
             sys.exit("You've left the game. Thank you for playing!")
         else:
-            print('Invalid number, only 1 or 2 are accepted')
+            clear()
+            print('Invalid number, only 1 or 2 are accepted \n')
 
 def calculate_score(guesses_allowed, user_level):
     '''
@@ -226,10 +226,13 @@ def game_loop(number, guess_range, user_level):
     '''
     guesses_allowed = 10
     incorrect_guesses = []
+    last_distance = -1
 
     while guesses_allowed > 0:
-        print(f'{guesses_allowed} remaining guesses')
+        # print(f'{guesses_allowed} remaining guesses')
         guess = user_guessed_number(guess_range, incorrect_guesses)
+        how_close_to_number = (number - guess)
+        how_close_to_number = how_close_to_number.__abs__()
         if guess == number:
             print(f"{guess} is your lucky number, you W I N!")
             score = (calculate_score(guesses_allowed, user_level))
@@ -237,33 +240,44 @@ def game_loop(number, guess_range, user_level):
             break
         else:
             if guess in incorrect_guesses:
-                print(f'Tried numbers: {incorrect_guesses}')
-                print()
-                print('You have tried this number already! Try again')
-                print()
+                print(f'Tried numbers: {incorrect_guesses} \n')
+                print('You have tried this number already! Try again \n')
                 continue
             else:
                 guesses_allowed -= 1
                 incorrect_guesses.append(guess)
-                print(f'Tried numbers: {incorrect_guesses}')
-                print()
+                print(f'Tried numbers: {incorrect_guesses} \n')
+                
+                print(f"lucky number {number}")
+                
+                print(f"how close to number {how_close_to_number}")
+
+                print(f"last distance {last_distance}")
+                
                 if guesses_allowed == 0:
                     print(f"The lucky number was {number} \n")
-                    print("You lose! Wish you more luck next time.")
-                    print()
+                    print("You lose! Wish you more luck next time. \n")
                 else:
-                    if abs(number - guess) <= 5:
-                        print("You're getting warmer!!!")
-                        print()
-                    elif abs(number - guess) <= 10:
-                        print("You're warm!")
-                        print()
-                    elif abs(number - guess) <= 20:
-                        print("You're cold.")
-                        print()
+                    if how_close_to_number <=3 and last_distance == -1:
+                        print(f"You're BOILING!!! Remaining guesses {guesses_allowed}")
+                    elif last_distance == -1:
+                        if 3 < how_close_to_number <= 8:
+                            print(f"You're Hot!! Remaining guesses {guesses_allowed}")
+                        elif 8 < how_close_to_number <= 15:
+                            print(f"You're Warm! Remaining guesses {guesses_allowed}")
+                        elif how_close_to_number > 15:
+                            print(f"You're Cold. Remaining guesses {guesses_allowed}")
                     else:
-                        print("You're freezing.")
-                        print()
+                        if how_close_to_number < last_distance:
+                            if how_close_to_number <= 3:
+                                print(f"You're HOTTER!! Remaining guesses {guesses_allowed}")
+                            else:
+                                print(f"You're Warmer! Remaining guesses {guesses_allowed}")
+                        elif how_close_to_number == last_distance:
+                                print(f"Argh, neither hotter neither colder! Remaining guesses {guesses_allowed}")
+                        elif how_close_to_number > last_distance:
+                            print(f"You're Colder. Remaining guesses {guesses_allowed}")
+                    last_distance = how_close_to_number
     else:
         play_again_or_exit()
 
