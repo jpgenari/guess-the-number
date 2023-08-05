@@ -1,4 +1,4 @@
-def game_name():
+def game_name_ascii():
     '''
     Prints the welcome message to users when starting the 
     program
