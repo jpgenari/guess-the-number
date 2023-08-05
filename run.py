@@ -197,6 +197,7 @@ def display_results(score):
     rows = data[1:]
 
     df = pd.DataFrame(rows, columns=headers)
+    df['Scores'] = pd.to_numeric(df['Scores'], errors='coerce')
     df = df[['Player', 'Scores']].sort_values(by='Scores', ascending=False)
 
     top_5 = df.head(5)
@@ -209,6 +210,8 @@ def display_results(score):
     print(top_5.to_string(index=False))
     print()
     play_again_or_exit()
+
+# display_results(score)
 
 
 def game_loop(number, guess_range, user_level):
@@ -245,6 +248,7 @@ def game_loop(number, guess_range, user_level):
                 print(f'Tried numbers: {incorrect_guesses}')
                 print()
                 if guesses_allowed == 0:
+                    print(f"The lucky number was {number} \n")
                     print("You lose! Wish you more luck next time.")
                     print()
                 else:
