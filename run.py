@@ -207,9 +207,9 @@ def update_results(user_name, score):
     '''
     data = [user_name, score]
     update_worksheet(data, 'results')
-    display_results()
+    display_results(user_name, score)
 
-def display_results():
+def display_results(user_name, score):
     '''
     Display results from previous players at the end of
     the game.
@@ -226,8 +226,11 @@ def display_results():
 
     top_5 = df.head(5)
     
-    # print('\n\n', messages.game_name_ascii())
-    print('\nCheck our all time top scorers ! \n')
+    clear()
+    print('\n')
+    messages.game_name_ascii()
+    print(f'\n{user_name} , you scored {score} points, well done !\n')
+    print('Check our all time top scorers ! \n')
     print(top_5.to_string(index=False) + '\n')
     play_again_or_exit()
 
@@ -257,9 +260,8 @@ def game_loop(number, guess_range, user_level):
             clear()
             print('\n')
             messages.game_name_ascii()
-            print(f"\n{guess} is your lucky number, you WIN !")
+            print(f"\n{guess} is your lucky number, you WIN ! \n")
             score = (calculate_score(guesses_allowed, user_level))
-            print(f'\nYou scored {score} points, well done !\n')
             # print('\n' * 2)
             pick_user_name(score)
             break
