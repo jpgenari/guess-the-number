@@ -277,7 +277,7 @@ def game_loop(number, guess_range, user_level):
                             else:
                                 print(f"You're Warmer! Remaining guesses {guesses_allowed}")
                         elif how_close_to_number == last_distance:
-                                print(f"Argh, neither hotter neither colder! Remaining guesses {guesses_allowed}")
+                            print(f"Argh, neither hotter neither colder! Remaining guesses {guesses_allowed}")
                         elif how_close_to_number > last_distance:
                             print(f"You're Colder. Remaining guesses {guesses_allowed}")
                     last_distance = how_close_to_number
@@ -290,9 +290,10 @@ def main():
     Runs the program outside game loop
     '''
     clear()
-    messages.welcome_message()
+    print('\n Welcome to ...')
+    messages.game_name()
     show_instructions()
-    messages.welcome_message()
+    messages.game_name()
     user_level = user_level_choice()
     clear()
     number, guess_range = generate_random_number(user_level)

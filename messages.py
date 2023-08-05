@@ -1,21 +1,17 @@
-def welcome_message():
+def game_name():
     '''
     Prints the welcome message to users when starting the 
     program
     '''
-    print()
-    print()
-    print()
-    print()
-    print()
-    print('Welcome to ...')
-    print()
-    print()
-    print('G U E S S   T H E   N U M B E R')
-    print()
-    print()
-    print()
-    print()
+    game_name_art = '''
+   ___                       _   _                __                 _                _ 
+  / _ \\_   _  ___  ___ ___  | |_| |__   ___    /\\ \\ \\_   _ _ __ ___ | |__   ___ _ __ / \\
+ / /_\\/ | | |/ _ \\/ __/ __| | __| '_ \\ / _ \\  /  \\/ / | | | '_ ` _ \\| '_ \\ / _ \\ '__/  /
+/ /_\\\\| |_| |  __/\\__ \\__ \\ | |_| | | |  __/ / /\\  /| |_| | | | | | | |_) |  __/ | /\\_/ 
+\\____/ \\__,_|\\___||___/___/  \\__|_| |_|\\___| \\_\\ \\/  \\__,_|_| |_| |_|_.__/ \\___|_| \\/   
+'''
+    print(game_name_art)
+
 
 def instructions_message():
     '''
@@ -40,4 +36,3 @@ def instructions_message():
     print()
     print('Good look!')
     print()
-    
