@@ -48,7 +48,7 @@ def show_instructions():
             clear()
             messages.instructions_message()
             input('\nPress ENTER to play:\n')
-            clear()
+            # clear()
             break
         elif instructions == 'n':
             break
@@ -326,6 +326,7 @@ def main():
     print('\nWelcome to ...')
     messages.game_name_ascii()
     show_instructions()
+    clear()
     print('\n')
     messages.game_name_ascii()
     print('\n')
