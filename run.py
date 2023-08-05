@@ -1,5 +1,10 @@
 import gspread
 from google.oauth2.service_account import Credentials
+import random
+import os
+import sys
+import pandas as pd
+import messages
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -12,41 +17,37 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('guess-the-number')
 
-import random
-import os
-import sys
-import pandas as pd
-
-import messages
-
 def update_worksheet(data, worksheet):
-    """
-    Updates the worksheet with the username and scores
-    """
+    '''
+    Updates the worksheet in Google docs with the username and score.
+    '''
     worksheet_to_update = SHEET.worksheet(worksheet)
     worksheet_to_update.append_row(data)
 
+
 def clear():
     '''
-    Clears the terminal when needed
+    Clears the terminal when needed when running the game.
     '''
     os.system('cls' if os.name == 'nt'else 'clear')
 
+
 def show_instructions():
     '''
-    Provides option to the users either view instructions before
-    the game or skip it going directly to play game. It also 
-    includes while loop to collect right option.
+    Gives to users option to either view or skip instructions before playing.
+    Includes a loop with an if else to confirm user correct input, and a break 
+    to stop showing instructions and run next function inside main().
     '''
     print('\n\n\nYou can view instructions or just start playing! \n')
 
     while True:
         instructions = input('Do you want to check the instructions? Y/N: \n').lower()
         clear()
+
         if instructions == 'y':
             clear()
             messages.instructions_message()
-            input('\nPress ENTER to proceed:\n')
+            input('\nPress ENTER to play:\n')
             clear()
             break
         elif instructions == 'n':
@@ -56,12 +57,14 @@ def show_instructions():
             messages.game_name_ascii()
             print('\n\n\nIncorrect entry, you should either pick [Y]es or [N]o \n')
 
+
 def user_level_choice():
     '''
-    Gets user level choice - easy, medium or hard. 
-    Try method implemented to validate data: collects int and 
-    raises error if input is not a number and if number
-    is not between 1 to 3.
+    Shows to users available level options - easy, medium or hard and gets
+    users' option to play with.
+    Contains a try/except to validate users' input raising errors and showing 
+    instructions when input is incorrect - either number out of range or not
+    numbers.
     '''
     while True:
         game_level = input('Enter 1 for easy, 2  medium or, if you dare, 3 for hard leveL: \n')
