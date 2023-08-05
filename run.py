@@ -61,15 +61,14 @@ def show_instructions():
 
 def user_level_choice():
     '''
-    Provides to the user the game level choice and get
-    user's option. 
+    Gets user level choice - easy, medium or hard. 
     Try method implemented to validate data: collects int and 
     raises error if input is not a number and if number
-    is not 1 or 2.
+    is not between 1 to 3.
     '''
     while True:
         print()
-        game_level = input('Enter 1 for easy or 2 for hard level:\n')
+        game_level = input('Enter 1 for easy, 2  medium or, if you dare, 3 for hard leveL: \n')
         clear()
 
         try:
@@ -78,7 +77,7 @@ def user_level_choice():
             messages.welcome_message()
             print('Numbers only!')
             continue
-        if 1 <= game_level <= 2:
+        if 1 <= game_level <= 3:
             return game_level
         else:
             messages.welcome_message()
@@ -88,12 +87,14 @@ def user_level_choice():
 def generate_random_number(user_level):
     '''
     Picks a random number to be guessed based on the user 
-    level option
+    level option, changing the number range.
     '''
     if user_level == 1:
         guess_range = 30
     elif user_level == 2:
         guess_range = 60
+    elif user_level == 3:
+        guess_range = 120
 
     number = random.randint(1, guess_range)
 
@@ -129,7 +130,7 @@ def user_guessed_number(guess_range, incorrect_guesses):
 
 def play_again_or_exit():
     '''
-    Provide an option for user to play again and
+    Provides option for user to play again and
     also validate user input
     '''
     while True:
@@ -157,9 +158,11 @@ def calculate_score(guesses_allowed, user_level):
     user selected level
     '''
     if user_level == 1:
-        score = guesses_allowed * 4
+        score = guesses_allowed * 10
+    elif user_level == 2:
+        score = guesses_allowed * 20
     else:
-        score = guesses_allowed * 8
+        score = guesses_allowed * 40
     return score
 
 def pick_user_name(score):
@@ -170,8 +173,8 @@ def pick_user_name(score):
         print()
         user_name = input('Please enter your name or nickname\n')
 
-        if len(user_name) <= 1 or len(user_name) >= 11:
-            print('Name should be 2 to 10 characters')
+        if len(user_name) <= 1 or len(user_name) >= 13:
+            print('Name should be 2 to 12 characters')
         else:
             update_results(user_name, score)
             return user_name
@@ -248,11 +251,11 @@ def game_loop(number, guess_range, user_level):
                 incorrect_guesses.append(guess)
                 print(f'Tried numbers: {incorrect_guesses} \n')
                 
-                print(f"lucky number {number}")
+                # print(f"lucky number {number}")
                 
-                print(f"how close to number {how_close_to_number}")
+                # print(f"how close to number {how_close_to_number}")
 
-                print(f"last distance {last_distance}")
+                # print(f"last distance {last_distance}")
                 
                 if guesses_allowed == 0:
                     print(f"The lucky number was {number} \n")
