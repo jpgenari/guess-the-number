@@ -17,6 +17,7 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('guess-the-number')
 
+
 def update_worksheet(data, worksheet):
     '''
     Updates the worksheet in Google docs with the username and score.
@@ -34,7 +35,7 @@ def clear():
 
 def validate_data(values):
     '''
-    Validates if all user inputs are integers using a try/except to raise 
+    Validates if all user inputs are integers using a try/except to raise
     error and show the message.
     '''
     try:
@@ -50,13 +51,16 @@ def validate_data(values):
 def show_instructions():
     '''
     Gives to users option to either view or skip instructions before playing.
-    Loop validates input with validate_data() an if else to confirm user correct input, 
-    and a break to stop showing instructions and run next function inside main().
+    Loop validates input with validate_data() an if else to confirm user
+    correct input, and a break to stop showing instructions and run next
+    function inside main().
     '''
     print('\nYou can view instructions or just start playing !')
 
     while True:
-        instructions = input('\nEnter 1 to view instructions and 2 to skip it : \n')
+        instructions = input(
+            '\nEnter 1 to view instructions and 2 to skip it : \n'
+            )
         clear()
         if validate_data(instructions):
             if int(instructions) == 1:
@@ -76,11 +80,14 @@ def user_level_choice():
     '''
     Shows to users available level options - easy, medium or hard and gets
     users' option to play with.
-    Loop validates input with validate_data() an if else to confirm user correct input, 
-    returning game_level passed to main().
+    Loop validates input with validate_data() an if else to confirm user
+    correct input, returning game_level passed to main().
     '''
     while True:
-        game_level = input('\nEnter 1 for easy, 2  medium or, if you dare, 3 for hard leveL : \n')
+        game_level = input(
+            '\nEnter 1 for easy, 2  medium or, if you dare, 3 for hard leveL :'
+            '\n'
+            )
         clear()
         if validate_data(game_level):
             if 1 <= int(game_level) <= 3:
@@ -93,7 +100,7 @@ def user_level_choice():
 
 def generate_random_number(user_level):
     '''
-    Generates random number, the range is based on the user_level, 
+    Generates random number, the range is based on the user_level,
     argument passed from user_level_choice().
     '''
     if user_level == 1:
@@ -109,12 +116,12 @@ def generate_random_number(user_level):
 
 def user_guessed_number(guess_range, incorrect_guesses):
     '''
-    Gets user guessed number, uses a loop to validate input with 
+    Gets user guessed number, uses a loop to validate input with
     validate_data() and if else to confirm user correct input, returning
     guess to main().
-    Each round it also prints the tried numbers from game_loop, uses 
-    arguments guess_range from generate_random_number() and 
-    incorrect_guesses from game_loop() to print information for 
+    Each round it also prints the tried numbers from game_loop, uses
+    arguments guess_range from generate_random_number() and
+    incorrect_guesses from game_loop() to print information for
     each round.
     '''
     while True:
@@ -133,18 +140,23 @@ def user_guessed_number(guess_range, incorrect_guesses):
                 print('\n')
                 messages.game_name_ascii()
                 print(f'\nTried numbers : {incorrect_guesses}')
-                print(f'\n{int(guess)} is outside the allowed range > 1 - {guess_range} ')
+                print(
+                    f'\n{int(guess)} is outside the allowed range > 1 - '
+                    '{guess_range}'
+                    )
 
 
 def play_again_or_exit():
     '''
     When the game ends, gives users option to either play again triggering
     main or exiting program.
-    Loop validates input with validate_data() an if else to confirm user correct input, 
-    either triggering main() or exiting program.
+    Loop validates input with validate_data() an if else to confirm user
+    correct input, either triggering main() or exiting program.
     '''
     while True:
-        play_again = input('\nPress 1, if you want to start again or 2 to exit :\n')
+        play_again = input(
+            '\nPress 1, if you want to start again or 2 to exit :\n'
+            )
         clear()
 
         if validate_data(play_again):
@@ -182,8 +194,8 @@ def calculate_score(guesses_allowed, user_level):
 def pick_user_name(score):
     '''
     Gets user name or nickname to be logged to the game history and
-    combines them passing to update_results() using a loop to get names 
-    with specific length. 
+    combines them passing to update_results() using a loop to get names
+    with specific length.
     '''
     while True:
         user_name = input('Please enter your name or nickname :\n')
@@ -213,8 +225,8 @@ def display_results(user_name, score):
     Displays the results from top 5 players and current player.
     Gets data from worksheet and converts it into a data frame handled
     by Pandas library that sorts players list by score and displays top 5.
-    Uses arguments user_name and score from pick_user_name() and calculate_score()
-    to display current game play results.
+    Uses arguments user_name and score from pick_user_name()
+    and calculate_score() to display current game play results.
     '''
     data = SHEET.worksheet('results').get_all_values()
     headers = data[0]
@@ -238,12 +250,13 @@ def display_results(user_name, score):
 def game_loop(number, guess_range, user_level):
     '''
     Runs the whole game.
-    Gets number, guess_range, guess and user_level from generate_random_number(),
-    user_guessed_number() and user_level_choice().
-    Sets guesses_allowed to run the game.
-    Checks if users still have guesses remaining, if guess has been tried already, 
-    updates incorrect_guesses list to show guesses tried to user, checks if guesses
-    match, and run conditionals to show hints to the users along the game.
+    Gets number, guess_range, guess and user_level
+    from generate_random_number(), user_guessed_number() and
+    user_level_choice(). Sets guesses_allowed to run the game.
+    Checks if users still have guesses remaining, if guess has been tried
+    already, updates incorrect_guesses list to show guesses tried to user,
+    checks if guesses match, and run conditionals to show hints to the users
+    along the game.
     Triggers functions in the program workflow.
     '''
     guesses_allowed = 10
@@ -284,25 +297,48 @@ def game_loop(number, guess_range, user_level):
                     print(f"\nThe lucky number was {number} .")
                     print("\nYou lose! Wish you more luck next time .")
                 else:
-                    if how_close_to_number <=3 and last_distance == -1:
-                        print(f"\nYou're BOILING !!! Remaining guesses {guesses_allowed}")
+                    if how_close_to_number <= 3 and last_distance == -1:
+                        print(
+                            "\nYou're BOILING !!! Remaining guesses "
+                            f"{guesses_allowed}"
+                            )
                     elif last_distance == -1:
                         if 3 < how_close_to_number <= 8:
-                            print(f"\nYou're Hot !! Remaining guesses {guesses_allowed}")
+                            print(
+                                "\nYou're Hot !! Remaining guesses "
+                                f"{guesses_allowed}"
+                                )
                         elif 8 < how_close_to_number <= 15:
-                            print(f"\nYou're Warm ! Remaining guesses {guesses_allowed}")
+                            print(
+                                "\nYou're Warm ! Remaining guesses "
+                                f"{guesses_allowed}"
+                                )
                         elif how_close_to_number > 15:
-                            print(f"\nYou're Cold . Remaining guesses {guesses_allowed}")
+                            print(
+                                "\nYou're Cold . Remaining guesses "
+                                f"{guesses_allowed}"
+                                )
                     else:
                         if how_close_to_number < last_distance:
                             if how_close_to_number <= 3:
-                                print(f"\nYou're HOTTER !! Remaining guesses {guesses_allowed}")
+                                print(
+                                    "\nYou're HOTTER !! Remaining guesses "
+                                    f"{guesses_allowed}"
+                                    )
                             else:
-                                print(f"\nYou're Warmer ! Remaining guesses {guesses_allowed}")
+                                print(
+                                    "\nYou're Warmer ! Remaining guesses "
+                                    f"{guesses_allowed}"
+                                    )
                         elif how_close_to_number == last_distance:
-                            print(f"\nArgh , neither hotter neither colder ! Remaining guesses {guesses_allowed}")
+                            print(
+                                "\nOops , neither hotter neither colder ! "
+                                f"Remaining guesses {guesses_allowed}")
                         elif how_close_to_number > last_distance:
-                            print(f"\nYou're Colder . Remaining guesses {guesses_allowed}")
+                            print(
+                                "\nYou're Colder . Remaining guesses "
+                                f"{guesses_allowed}"
+                                )
                     last_distance = how_close_to_number
     else:
         play_again_or_exit()
@@ -325,5 +361,6 @@ def main():
     print('\n')
     messages.game_name_ascii()
     game_loop(number, guess_range, user_level)
+
 
 main()
