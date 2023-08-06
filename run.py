@@ -141,8 +141,8 @@ def user_guessed_number(guess_range, incorrect_guesses):
                 messages.game_name_ascii()
                 print(f'\nTried numbers : {incorrect_guesses}')
                 print(
-                    f'\n{int(guess)} is outside the allowed range > 1 - '
-                    '{guess_range}'
+                    '\n{int(guess)} is outside the allowed range > 1 - '
+                    f'{guess_range}'
                     )
 
 
