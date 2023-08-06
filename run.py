@@ -89,6 +89,7 @@ def user_level_choice():
             '\n'
             )
         clear()
+
         if validate_data(game_level):
             if 1 <= int(game_level) <= 3:
                 return int(game_level)
@@ -141,9 +142,11 @@ def user_guessed_number(guess_range, incorrect_guesses):
                 messages.game_name_ascii()
                 print(f'\nTried numbers : {incorrect_guesses}')
                 print(
-                    '\n{int(guess)} is outside the allowed range > 1 - '
+                    f'\n{int(guess)} is outside the allowed range > 1 - '
                     f'{guess_range}'
                     )
+        else:
+            print(f'\nTried numbers : {incorrect_guesses}')
 
 
 def play_again_or_exit():
