@@ -2,8 +2,8 @@
 Import section
 '''
 import os
-import random
 import sys
+import random
 from colorama import Fore, Style
 from pyfiglet import Figlet
 import pandas as pd

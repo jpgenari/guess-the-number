@@ -118,7 +118,7 @@ Considering this project scope and design, as for user stories we contain only *
 
 ** *The game should not work on mobile as it runs inside Code Institute mock terminal on Heroku. No accessibility or responsivity testing was applied as therefore, they are not needed.* **
 
-### VALIDATOR TESTING
+### Validator Testing
 
 Python code has been tested and validated with [CI Python Linter](https://pep8ci.herokuapp.com/) and all errors have been removed from code.
 
@@ -130,7 +130,7 @@ Python code has been tested and validated with [CI Python Linter](https://pep8ci
 
   ![run.py](/assets/images/readme-validator-instructions-py.png)
 
-### TESTING AS A TABLE
+### Testing as a Table
 
 **INPUT**|**ACTION**|**EXPECTED**|**RESULT**
 ----------|----------|----------|----------
@@ -165,50 +165,89 @@ Press 1, if you want to start again or 2 to exit:|User inputs integer 1 + press 
 ||User inputs anything other than integer + press Enter|Displays message: "Numbers only!"|Works as expected
 ||User inputs any integer other than 1 or 2 + press Enter|Displays message: "Number outside the allowed range > 1-2"|Works as expected
 
-### Bugs
+Application did not break not matter inputs added and correct errors were displayed.
 
-- In development stage, multiple minor bugs were noticed, most of them while creating functions and styling. However, 2 bugs stood out.
+## BUGS
 
-- Solved Bugs
-  - Function returning same value with assign event listener to buttons
-    - After implementing solution to make [If/Else statement execute with event listener inside](https://stackoverflow.com/questions/48167887/if-else-statement-not-executing-correctly-with-event-listener-inside-javascript), the functions getUserOption() and getUserNumber() were still returning the same value. The bug was taking place due to two semicolons misplaced in the code (after 'btn-evens' condition and after 'btn-5' condition). The but was solved with the help of [Stack Overflow community](https://stackoverflow.com/questions/76551168/functions-returning-same-value-even-with-assigned-event-listener-to-the-buttons).
+### Solved bugs
 
-    - Code example with bug:
+#### - Display_results() function not working properly with scores >= 100 and more than 16 rows of data
 
-      ```text
+- This function reads the game data base (worksheet) and uses Pandas library to create a data frame with DataFrame() using columns and rows as parameters and then use sort.values() function to sort the results based on 'Scores' column from highest to lowest, filtering the top 5 results with top() function. After that, it  prints the data frame to the terminal as results.
+- When running tests on the game, it was noticed 2 issues: 1. when the scores where equal to 100 or higher (and integer with 3 digits or more), the row with these values were ignored by the sort.values() function; 2. when the worksheet contained 16 or more rows, the sort.values() stopped working as expected, always adding most recent result to the top 5, with higher scored being displayed after.
+- The bug was solved by adding the function to_numeric() to guarantee all results from column were converted into integers before being sorted.
 
-      function getUserOption(userOption) {
-      let userResult;
+  - Code example with bug:
 
-      if (userOption === 'btn-odds') {
-        userResult = 1;
-      } else if (userOption === 'btn-evens'); {
-        userResult = 0;
-      }}
+  ```
+  def display_results(user_name, score):
+    data = SHEET.worksheet('results').get_all_values()
+    headers = data[0]
+    rows = data[1:]
 
-      function getUserNumber(userNumber) {
+    data_frame = pd.DataFrame(rows, columns=headers)
+    data_frame = data_frame[['Player', 'Scores']].sort_values(
+        by='Scores', ascending=False
+        )
 
-      let userNumberSelected;
+    top_5 = data_frame.head(5)
 
-      if (userNumber === 'btn-1') {
-        userNumberSelected = 1;
-      } else if (userNumber === 'btn-2') {
-        userNumberSelected = 2;
-      } else if (userNumber === 'btn-3') {
-        userNumberSelected = 3;
-      } else if (userNumber === 'btn-4') {
-        userNumberSelected = 4;
-      } else if (userNumber === 'btn-5'); {
-        userNumberSelected = 5;
-      }}
+    clear()
+    print('\n')
+    game_name_ascii()
+    print(
+        f'\n{Fore.GREEN}{user_name}{Style.RESET_ALL}, you scored {Fore.GREEN}'
+        f'{score}{Style.RESET_ALL} points, well done!\n'
+        )
+    print('Check our all time top scorers!\n')
+    print(top_5.to_string(index=False))
+    play_again_or_exit()
+  ```
+   - This string was added before sort.values() function to fix the bug: 
+   
+   ```
+   data_frame['Scores'] = pd.to_numeric(data_frame['Scores'], errors='coerce')
+   ```
 
-      ```
+#### - Deployment error after implementing **colorama** and **pyfiglet**
+
+- **colorama** and **pyfiglet** where implemented into the code in final development stage to import *Fore* and *Style* (from first one) and *Figlet* (from second one) in order to add color to the game text and styling to the game name respectively.
+- After the implementation, the command *Pip3 freeze > requirements.txt* was run to the terminal in order to update the file with requirements for Heroku deployment. After deployment, when trying to run the game, an error was returning in the terminal line 7, with **colorama** not found crashing the application. Upon the error, requirements.txt file was inspected where both **colorama** and **pyfiglet** where not found.
+- Upon some online research, a possible reason for the issue could be these libraries not installed (the project is developed using VS Code as IDE, running locally to avoid disruptions from online IDEs). Using *pip* commands in the terminal it was confirmed both libraries were installed, and, still, requirements.txt was not being updated as expected.
+- Some more research was made and the possible issue was pointed to the current installed libraries not being fully compatible with IDE with the application was running perfectly in terminals, both VS Code terminal and Mac OS terminal, however, requirements were not being updated.
+- In order to solve the bug and deploy a runnable application, the solution applied was to manually add the requirements to the requirements.txt using currently libraries version installed. Using pip commands to install libraries it was confirmed installation along side version, which were added to the requirements.txt file.
+
+  ```
+  pyfiglet==0.8.post1
+  colorama==0.4.6
+  ```
+
+  ![Terminal](/assets/images/readme-terminal.png)
 
 ### Unfixed Bugs
 
-- There are no unfixed bugs.
+There are no unfixed bugs.
 
-## Deployment
+## TOOLS AND TECHNOLOGIES
+
+- [Python](https://www.python.org/) - backend programming language
+- [GitHub](https://github.com/) - used store the code online and deployment
+- [Heroku](https://www.heroku.com/) - cloud platform used to deploy and run application inside Code Institute mock terminal
+- [EZGIF.COM](https://ezgif.com/) - tool used to generate gif added to the README doc to display UI functionality
+
+### Imports
+
+- Imported and implemented libraries and modules in the Python code:
+
+  - `os` : used to clear the terminal within clear() function
+  - `sys` : used to exit exit the program within play_again_or_exit() function
+  - `random` : used to generate random number to be guessed in the game within generate_random_number() function
+  - `colorama` : used to apply color to the game running in the terminal, used across the code
+  - `pyfiglet` : used to add font style to the game name within game_name_ascii() function
+  - `pandas` : used within display_results() function to created, sort and display a data frame with game ranked results
+  - `gspread` and `google.oauth2.service_account` : used to access and manipulate worksheet inside Google Spreadsheets to store and read data frame with game results
+
+## DEPLOYMENT
 
 - Lorem Ipsum
   - Lorem Ipsum
