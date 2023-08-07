@@ -22,5 +22,9 @@
    },
    "files.autoSave": "afterDelay",
    "workbench.colorTheme": "Default Light Modern",
-   "editor.defaultFormatter": "HookyQR.beautify"
+   "editor.defaultFormatter": "HookyQR.beautify",
+   "cSpell.words": [
+      "CREDS",
+      "gspread"
+   ]
 }

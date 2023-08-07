@@ -1,8 +1,11 @@
+'''
+Import section
+'''
+import os
+import random
+import sys
 import gspread
 from google.oauth2.service_account import Credentials
-import random
-import os
-import sys
 import pandas as pd
 import messages
 
@@ -235,11 +238,11 @@ def display_results(user_name, score):
     headers = data[0]
     rows = data[1:]
 
-    df = pd.DataFrame(rows, columns=headers)
-    df['Scores'] = pd.to_numeric(df['Scores'], errors='coerce')
-    df = df[['Player', 'Scores']].sort_values(by='Scores', ascending=False)
+    data_frame = pd.DataFrame(rows, columns=headers)
+    data_frame['Scores'] = pd.to_numeric(data_frame['Scores'], errors='coerce')
+    data_frame = data_frame[['Player', 'Scores']].sort_values(by='Scores', ascending=False)
 
-    top_5 = df.head(5)
+    top_5 = data_frame.head(5)
 
     clear()
     print('\n')
@@ -268,15 +271,15 @@ def game_loop(number, guess_range, user_level):
 
     while guesses_allowed > 0:
         guess = user_guessed_number(guess_range, incorrect_guesses)
-        how_close_to_number = (number - guess)
-        how_close_to_number = how_close_to_number.__abs__()
+        how_close_to_number = number - guess
+        how_close_to_number = abs(how_close_to_number)
 
         if guess == number:
             clear()
             print('\n')
             messages.game_name_ascii()
             print(f"\n{guess} is your lucky number, you WIN ! \n")
-            score = (calculate_score(guesses_allowed, user_level))
+            score = calculate_score(guesses_allowed, user_level)
             pick_user_name(score)
             break
         else:
