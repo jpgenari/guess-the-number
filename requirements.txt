@@ -36,3 +36,5 @@ tomlkit==0.12.1
 tzdata==2023.3
 urllib3==1.26.16
 wrapt==1.15.0
+pyfiglet==0.8.post1
+colorama==0.4.6
