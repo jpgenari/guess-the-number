@@ -1,6 +1,10 @@
 # Guess the Number!
 
-Loren ipsum Loren ipsum Loren ipsum
+Guess the Number! is a Python terminal game, which runs in the Code Institute mock terminal on Heroku.
+
+In this game, users will be challenged find a random generate number. In each game play users get 10 "guesses", allowing to try up to 10 numbers. The random number will be generated in a range based on the difficulty level selected by users (easy, medium and hard). After each try, the game will throw a hint in order to help finding the number and the tried number will be displayed as a guide.
+
+The game works well as an alternative for a quick game play, adding some elements to challenge the users such as calling generated number as their "lucky number" and funny hints as the game runs. 
 
 [Guess the Number!](https://guess-the-number-p3-31510f7a135e.herokuapp.com/)
 
