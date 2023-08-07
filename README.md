@@ -6,7 +6,7 @@ In this game, users will be challenged find a random generate number. In each ga
 
 The game works well as an alternative for a quick game play, adding some elements to challenge the users such as calling generated number as their "lucky number" and funny hints as the game runs.
 
-[Guess the Number!](https://guess-the-number-p3-31510f7a135e.herokuapp.com/)
+Link to live game: [Guess the Number](https://guess-the-number-p3-31510f7a135e.herokuapp.com/)
 
 ![Responsive Mockup](/assets/images/readme-am-i-responsive.png)
 
@@ -99,6 +99,16 @@ The game works well as an alternative for a quick game play, adding some element
 
 - Include additional game levels to provide more options when playing the game.
 - Update display results feature to display ranked results split by game level, eg: top 5 easy, top 5 medium and top 5 hard.
+
+## USER STORIES
+
+Considering this project scope and design, as for user stories we contain only **user** who is the player of the game.
+
+- As a **user** I want to either **view the game instructions** so I can **understand how to play the game and its rules** or to **skip and play directly, as I am returning player and know how to play**.
+- As a **user** I want to **select a game level** that best suits me, either **being easy and relaxing or hard and challenging**.
+- As a **user** I want to be able to **view hints that help me find the "lucky" number** and **view numbers I have tried already** allowing me to **get the correct number and win the game**.
+- As a **user** I want to either **add my name or nickname** to be displayed in the game score board results to **log my results to display how I performed** or **to leave without adding any info about myself**.
+- As a **user** I want to be given the option to either **continue playing** or to **leave the game**.
 
 ## Testing
 

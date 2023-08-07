@@ -102,7 +102,7 @@ def user_level_choice():
     '''
     while True:
         game_level = input(
-            '\nEnter 1 for easy, 2  medium or, if you dare, 3 for hard leveL:'
+            '\nEnter 1 for easy, 2  medium or, if you dare, 3 for hard level:'
             '\n'
             )
         clear()
