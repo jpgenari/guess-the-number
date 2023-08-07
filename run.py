@@ -175,7 +175,7 @@ def user_guessed_number(guess_range, incorrect_guesses):
         else:
             print(
                 f'\nTried numbers: {Fore.YELLOW}{incorrect_guesses}'
-                '{Style.RESET_ALL}'
+                f'{Style.RESET_ALL}'
                 )
 
 
@@ -332,8 +332,8 @@ def game_loop(number, guess_range, user_level):
                     f'\nTried numbers: {Fore.YELLOW}{incorrect_guesses}'
                     f'{Style.RESET_ALL}')
                 print(
-                    Fore.RED + '\nYou have tried this number already! Try'
-                    'again.' + Style.RESET_ALL
+                    f'{Fore.RED}\nYou have tried this number already! Try'
+                    f'again.{Style.RESET_ALL}'
                     )
                 continue
             else:
@@ -343,7 +343,8 @@ def game_loop(number, guess_range, user_level):
                 game_name_ascii()
                 print(
                     f'\nTried numbers: {Fore.YELLOW}{incorrect_guesses}'
-                    '{Style.RESET_ALL}')
+                    f'{Style.RESET_ALL}'
+                    )
                 if guesses_allowed == 0:
                     clear()
                     print('\n')
@@ -356,7 +357,7 @@ def game_loop(number, guess_range, user_level):
                 else:
                     if how_close_to_number <= 3 and last_distance == -1:
                         print(
-                            "\nYou're BOILING !!! Remaining guesses"
+                            "\nYou're BOILING !!! Remaining guesses "
                             f"{Fore.YELLOW}{guesses_allowed}{Style.RESET_ALL}"
                             )
                     elif last_distance == -1:
@@ -384,23 +385,23 @@ def game_loop(number, guess_range, user_level):
                                 print(
                                     "\nYou're HOTTER !! Remaining guesses "
                                     f"{Fore.YELLOW}{guesses_allowed}"
-                                    "{Style.RESET_ALL}"
+                                    f"{Style.RESET_ALL}"
                                     )
                             else:
                                 print(
-                                    "\nYou're Warmer ! Remaining guesses "
+                                    "\nYou're Warmer! Remaining guesses "
                                     f"{Fore.YELLOW}{guesses_allowed}"
                                     f"{Style.RESET_ALL}"
                                     )
                         elif how_close_to_number == last_distance:
                             print(
-                                "\nOops , neither hotter neither colder ! "
+                                "\nOops , neither hotter neither colder! "
                                 f"{Fore.YELLOW}{guesses_allowed}"
                                 f"{Style.RESET_ALL}"
                                 )
                         elif how_close_to_number > last_distance:
                             print(
-                                "\nYou're Colder . Remaining guesses "
+                                "\nYou're Colder. Remaining guesses "
                                 f"{Fore.YELLOW}{guesses_allowed}"
                                 f"{Style.RESET_ALL}"
                                 )
