@@ -69,11 +69,11 @@ def show_instructions():
     correct input, and a break to stop showing instructions and run next
     function inside main().
     '''
-    print('\nView instructions or just start playing!')
+    print('\nView instructions or start playing!')
 
     while True:
         see_instructions = input(
-            '\nEnter 1 to view instructions and 2 to skip it:\n'
+            '\nEnter 1 to view instructions and 2 to skip them:\n'
             )
         clear()
         if validate_data(see_instructions):

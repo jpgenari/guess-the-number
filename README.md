@@ -17,7 +17,9 @@ The game works well as an alternative for a quick game play, adding some element
 - **Landing page**
   - Opens a blank page showing a python terminal following Code Institute mock terminal on Heroku. The whole game runs inside the Python terminal.
 - **Welcome / View Instructions**
-  - The initial screen displayed on terminal will show a welcome message 
+  - The initial displayed screen on terminal contains:
+    - **Welcome message** and **game name** welcoming users to the game and the game name using stylishly font - the game name should be displayed in every screen except for instructions screen to reinforce game identity.
+    - **See instructions** will prompt to users with the option to either see instructions or skip them - this option is given as returning players might not be interested in seeing the instructions again. Users will 
 
 
     ![Header]()
