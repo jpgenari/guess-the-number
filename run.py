@@ -27,8 +27,7 @@ SHEET = GSPREAD_CLIENT.open('guess-the-number')
 
 def game_name_ascii():
     '''
-    Prints the welcome message to users when starting the
-    program
+    Prints game to users when needed.
     '''
     print(Fore.GREEN + f.renderText('Guess the Number!') + Style.RESET_ALL)
 
@@ -357,25 +356,25 @@ def game_loop(number, guess_range, user_level):
                 else:
                     if how_close_to_number <= 3 and last_distance == -1:
                         print(
-                            "\nYou're BOILING !!! Remaining guesses "
+                            "\nYou're BOILING!!! Remaining guesses "
                             f"{Fore.YELLOW}{guesses_allowed}{Style.RESET_ALL}"
                             )
                     elif last_distance == -1:
                         if 3 < how_close_to_number <= 8:
                             print(
-                                "\nYou're Hot !! Remaining guesses "
+                                "\nYou're Hot!! Remaining guesses "
                                 f"{Fore.YELLOW}{guesses_allowed}"
                                 f"{Style.RESET_ALL}"
                                 )
                         elif 8 < how_close_to_number <= 15:
                             print(
-                                "\nYou're Warm ! Remaining guesses "
+                                "\nYou're Warm! Remaining guesses "
                                 f"{Fore.YELLOW}{guesses_allowed}"
                                 f"{Style.RESET_ALL}"
                                 )
                         elif how_close_to_number > 15:
                             print(
-                                "\nYou're Cold . Remaining guesses "
+                                "\nYou're Cold. Remaining guesses "
                                 f"{Fore.YELLOW}{guesses_allowed}"
                                 f"{Style.RESET_ALL}"
                                 )
@@ -383,7 +382,7 @@ def game_loop(number, guess_range, user_level):
                         if how_close_to_number < last_distance:
                             if how_close_to_number <= 3:
                                 print(
-                                    "\nYou're HOTTER !! Remaining guesses "
+                                    "\nYou're HOTTER!! Remaining guesses "
                                     f"{Fore.YELLOW}{guesses_allowed}"
                                     f"{Style.RESET_ALL}"
                                     )
@@ -395,7 +394,7 @@ def game_loop(number, guess_range, user_level):
                                     )
                         elif how_close_to_number == last_distance:
                             print(
-                                "\nOops , neither hotter neither colder! "
+                                "\nOops, neither hotter neither colder! "
                                 f"{Fore.YELLOW}{guesses_allowed}"
                                 f"{Style.RESET_ALL}"
                                 )
