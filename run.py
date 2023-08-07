@@ -4,14 +4,14 @@ Import section
 import os
 import random
 import sys
-from colorama import Fore, Back, Style
+from colorama import Fore, Style
 from pyfiglet import Figlet
 import pandas as pd
 import instructions
 import gspread
 from google.oauth2.service_account import Credentials
 
-f = Figlet(font = '3x5')
+f = Figlet(font='small')
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -30,7 +30,7 @@ def game_name_ascii():
     Prints the welcome message to users when starting the
     program
     '''
-    print(f.renderText('Guess the Number!'))
+    print(Fore.GREEN + f.renderText('Guess the Number!') + Style.RESET_ALL)
 
 
 def update_worksheet(data, worksheet):
@@ -58,7 +58,7 @@ def validate_data(values):
     except ValueError:
         print('\n')
         game_name_ascii()
-        print('\nNumbers only !')
+        print(f'\n{Fore.RED}Numbers only!{Style.RESET_ALL}')
         return False
     return True
 
@@ -70,25 +70,28 @@ def show_instructions():
     correct input, and a break to stop showing instructions and run next
     function inside main().
     '''
-    print('\nYou can view instructions or just start playing !')
+    print('\nYou can view instructions or just start playing!')
 
     while True:
         see_instructions = input(
-            '\nEnter 1 to view instructions and 2 to skip it : \n'
+            '\nEnter 1 to view instructions and 2 to skip it:\n'
             )
         clear()
         if validate_data(see_instructions):
             if int(see_instructions) == 1:
                 clear()
                 instructions.instructions_message()
-                input('Press ENTER to play :\n')
+                input('Press ENTER to play:\n')
                 break
             elif int(see_instructions) == 2:
                 break
             else:
                 print('\n')
                 game_name_ascii()
-                print('\nNumber outside the allowed range > 1 or 2')
+                print(
+                    f'{Fore.RED}\nNumber outside the allowed range > 1-2'
+                    f'{Style.RESET_ALL}'
+                    )
 
 
 def user_level_choice():
@@ -100,7 +103,7 @@ def user_level_choice():
     '''
     while True:
         game_level = input(
-            '\nEnter 1 for easy, 2  medium or, if you dare, 3 for hard leveL :'
+            '\nEnter 1 for easy, 2  medium or, if you dare, 3 for hard leveL:'
             '\n'
             )
         clear()
@@ -111,7 +114,10 @@ def user_level_choice():
             else:
                 print('\n')
                 game_name_ascii()
-                print('\nNumber outside the allowed range > 1 to 3 ')
+                print(
+                    f'\n{Fore.RED}Number outside the allowed range > 1-3'
+                    f'{Style.RESET_ALL}'
+                    )
 
 
 def generate_random_number(user_level):
@@ -141,13 +147,16 @@ def user_guessed_number(guess_range, incorrect_guesses):
     each round.
     '''
     while True:
-        guess = input(f'\nGuess a number between 1 and {guess_range} :\n')
+        guess = input(f'\nGuess a number between 1 and {guess_range}:\n')
         clear()
 
         if validate_data(guess):
             print('\n')
             game_name_ascii()
-            print(f'\nTried numbers : {incorrect_guesses}')
+            print(
+                f'\nTried numbers: {Fore.YELLOW}{incorrect_guesses}'
+                f'{Style.RESET_ALL}'
+                )
             if 1 <= int(guess) <= guess_range:
                 clear()
                 return int(guess)
@@ -155,13 +164,19 @@ def user_guessed_number(guess_range, incorrect_guesses):
                 clear()
                 print('\n')
                 game_name_ascii()
-                print(f'\nTried numbers : {incorrect_guesses}')
                 print(
-                    f'\n{int(guess)} is outside the allowed range > 1 - '
-                    f'{guess_range}'
+                    f'\nTried numbers: {Fore.YELLOW}{incorrect_guesses}'
+                    f'{Style.RESET_ALL}'
+                    )
+                print(
+                    f'\n{Fore.RED}{int(guess)} is outside the allowed range >'
+                    f' 1-{guess_range}{Style.RESET_ALL}'
                     )
         else:
-            print(f'\nTried numbers : {incorrect_guesses}')
+            print(
+                f'\nTried numbers: {Fore.YELLOW}{incorrect_guesses}'
+                '{Style.RESET_ALL}'
+                )
 
 
 def play_again_or_exit():
@@ -173,7 +188,7 @@ def play_again_or_exit():
     '''
     while True:
         play_again = input(
-            '\nPress 1, if you want to start again or 2 to exit :\n'
+            '\nPress 1, if you want to start again or 2 to exit:\n'
             )
         clear()
 
@@ -187,12 +202,15 @@ def play_again_or_exit():
                 clear()
                 print('\n')
                 game_name_ascii()
-                sys.exit("\nYou've left the game. Thank you for playing !")
+                sys.exit("\nYou've left the game. Thank you for playing!")
             else:
                 clear()
                 print('\n')
                 game_name_ascii()
-                print('\nInvalid number, only 1 or 2 are accepted !')
+                print(
+                    f'{Fore.RED}\nInvalid number, only 1 or 2 are accepted!'
+                    f'{Style.RESET_ALL}'
+                    )
 
 
 def calculate_score(guesses_allowed, user_level):
@@ -216,13 +234,16 @@ def pick_user_name(score):
     with specific length.
     '''
     while True:
-        user_name = input('Please enter your name or nickname :\n')
+        user_name = input('Please enter your name or nickname:\n')
 
         if len(user_name) <= 1 or len(user_name) >= 13:
             clear()
             print('\n')
             game_name_ascii()
-            print('\nName should be 2 to 12 characters .\n')
+            print(
+                f'{Fore.RED}\nName should be 2 to 12 characters.\n'
+                f'{Style.RESET_ALL}'
+                )
         else:
             update_results(user_name, score)
             return user_name
@@ -252,15 +273,20 @@ def display_results(user_name, score):
 
     data_frame = pd.DataFrame(rows, columns=headers)
     data_frame['Scores'] = pd.to_numeric(data_frame['Scores'], errors='coerce')
-    data_frame = data_frame[['Player', 'Scores']].sort_values(by='Scores', ascending=False)
+    data_frame = data_frame[['Player', 'Scores']].sort_values(
+        by='Scores', ascending=False
+        )
 
     top_5 = data_frame.head(5)
 
     clear()
     print('\n')
     game_name_ascii()
-    print(f'\n{user_name} , you scored {score} points, well done !\n')
-    print('Check our all time top scorers ! \n')
+    print(
+        f'\n{Fore.GREEN}{user_name}{Style.RESET_ALL}, you scored {Fore.GREEN}'
+        f'{score}{Style.RESET_ALL} points, well done!\n'
+        )
+    print('Check our all time top scorers!\n')
     print(top_5.to_string(index=False))
     play_again_or_exit()
 
@@ -290,7 +316,10 @@ def game_loop(number, guess_range, user_level):
             clear()
             print('\n')
             game_name_ascii()
-            print(f"\n{guess} is your lucky number, you WIN ! \n")
+            print(
+                f"\n{Fore.GREEN}{guess}{Style.RESET_ALL} is your lucky number,"
+                f" you {Fore.GREEN}WIN!{Style.RESET_ALL}\n"
+                )
             score = calculate_score(guesses_allowed, user_level)
             pick_user_name(score)
             break
@@ -299,63 +328,81 @@ def game_loop(number, guess_range, user_level):
                 clear()
                 print('\n')
                 game_name_ascii()
-                print(f'\nTried numbers: {incorrect_guesses}')
-                print('\nYou have tried this number already ! Try again .')
+                print(
+                    f'\nTried numbers: {Fore.YELLOW}{incorrect_guesses}'
+                    f'{Style.RESET_ALL}')
+                print(
+                    Fore.RED + '\nYou have tried this number already! Try'
+                    'again.' + Style.RESET_ALL
+                    )
                 continue
             else:
                 guesses_allowed -= 1
                 incorrect_guesses.append(guess)
                 print('\n')
                 game_name_ascii()
-                print(f'\nTried numbers: {incorrect_guesses}')
+                print(
+                    f'\nTried numbers: {Fore.YELLOW}{incorrect_guesses}'
+                    '{Style.RESET_ALL}')
                 if guesses_allowed == 0:
                     clear()
                     print('\n')
                     game_name_ascii()
-                    print(f"\nThe lucky number was {number} .")
-                    print("\nYou lose! Wish you more luck next time .")
+                    print(
+                        f"\nThe lucky number was {Fore.YELLOW}{number}"
+                        f"{Style.RESET_ALL}."
+                        )
+                    print("\nYou lose! Wish you more luck next time.")
                 else:
                     if how_close_to_number <= 3 and last_distance == -1:
                         print(
-                            "\nYou're BOILING !!! Remaining guesses "
-                            f"{guesses_allowed}"
+                            "\nYou're BOILING !!! Remaining guesses"
+                            f"{Fore.YELLOW}{guesses_allowed}{Style.RESET_ALL}"
                             )
                     elif last_distance == -1:
                         if 3 < how_close_to_number <= 8:
                             print(
                                 "\nYou're Hot !! Remaining guesses "
-                                f"{guesses_allowed}"
+                                f"{Fore.YELLOW}{guesses_allowed}"
+                                f"{Style.RESET_ALL}"
                                 )
                         elif 8 < how_close_to_number <= 15:
                             print(
                                 "\nYou're Warm ! Remaining guesses "
-                                f"{guesses_allowed}"
+                                f"{Fore.YELLOW}{guesses_allowed}"
+                                f"{Style.RESET_ALL}"
                                 )
                         elif how_close_to_number > 15:
                             print(
                                 "\nYou're Cold . Remaining guesses "
-                                f"{guesses_allowed}"
+                                f"{Fore.YELLOW}{guesses_allowed}"
+                                f"{Style.RESET_ALL}"
                                 )
                     else:
                         if how_close_to_number < last_distance:
                             if how_close_to_number <= 3:
                                 print(
                                     "\nYou're HOTTER !! Remaining guesses "
-                                    f"{guesses_allowed}"
+                                    f"{Fore.YELLOW}{guesses_allowed}"
+                                    "{Style.RESET_ALL}"
                                     )
                             else:
                                 print(
                                     "\nYou're Warmer ! Remaining guesses "
-                                    f"{guesses_allowed}"
+                                    f"{Fore.YELLOW}{guesses_allowed}"
+                                    f"{Style.RESET_ALL}"
                                     )
                         elif how_close_to_number == last_distance:
                             print(
                                 "\nOops , neither hotter neither colder ! "
-                                f"Remaining guesses {guesses_allowed}")
+                                f"{Fore.YELLOW}{guesses_allowed}"
+                                f"{Style.RESET_ALL}"
+                                )
                         elif how_close_to_number > last_distance:
                             print(
                                 "\nYou're Colder . Remaining guesses "
-                                f"{guesses_allowed}"
+                                f"{Fore.YELLOW}{guesses_allowed}"
+                                f"{Style.RESET_ALL}"
                                 )
                     last_distance = how_close_to_number
     else:
