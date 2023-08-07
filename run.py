@@ -331,7 +331,7 @@ def game_loop(number, guess_range, user_level):
                     f'\nTried numbers: {Fore.YELLOW}{incorrect_guesses}'
                     f'{Style.RESET_ALL}')
                 print(
-                    f'{Fore.RED}\nYou have tried this number already! Try'
+                    f'{Fore.RED}\nYou have tried this number already! Try '
                     f'again.{Style.RESET_ALL}'
                     )
                 continue

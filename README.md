@@ -110,43 +110,60 @@ Considering this project scope and design, as for user stories we contain only *
 - As a **user** I want to either **add my name or nickname** to be displayed in the game score board results to **log my results to display how I performed** or **to leave without adding any info about myself**.
 - As a **user** I want to be given the option to either **continue playing** or to **leave the game**.
 
-## Testing
+## DATA SCHEMA
 
-- 
-  
-### Workflow testing
 
-- Lorem Ipsum
-  - Lorem Ipsum
 
-- Lorem Ipsum
+## TESTING
 
-  [Am I Responsive?](https://ui.dev/amiresponsive?url=https://guess-the-number-p3-31510f7a135e.herokuapp.com/) shows all available common layouts.
+** *The game should not work on mobile as it runs inside Code Institute mock terminal on Heroku. No accessibility or responsivity testing was applied as therefore, they are not needed.* **
 
-- Tested Browsers and Devices
+### VALIDATOR TESTING
 
-  - Desktop:
-    - Google Chrome
-    - Mozilla Firefox
-    - Apple Safari
-    - DuckDuckGo
-  - Tablet *tested through Google Chrome Inspector*:
-    - *iPad Air*
-    - *iPad Mini*
-    - *Surface Pro 7*
-    - *Google Nest Hub*
-  - Mobile *tested through Google Chrome Inspector*:
-    - iPhone 13 Pro (Google Chrome, Mozilla Firefox, Apple Safari and DuckDuckGo)
-    - *iPhone SE*
-    - *iPhone XR*
-    - *Pixel 5*
-    - *Samsung Galaxy S8+*
-    - *Samsung Galaxy S20 Ultra*
+Python code has been tested and validated with [CI Python Linter](https://pep8ci.herokuapp.com/) and all errors have been removed from code.
 
-### Validator Testing
+- **run.py**
 
-- Lorem Ipsum
-  - Lorem Ipsum [W3C validator]().
+  ![run.py](/assets/images/readme-validator-run-py.png)
+
+- **instructions.py**
+
+  ![run.py](/assets/images/readme-validator-instructions-py.png)
+
+### TESTING AS A TABLE
+
+**INPUT**|**ACTION**|**EXPECTED**|**RESULT**
+----------|----------|----------|----------
+Enter 1 to view instructions and 2 to skip them:|User inputs integer 1 + press Enter|Moves to instructions screen|Works as expected
+||User inputs integer 2 + press Enter|Skips instructions and moves to select level|Works as expected
+||User inputs anything other than integer + press Enter|Displays message: "Numbers only!"|Works as expected
+||User inputs any integer other than 1 or 2 + press Enter|Displays message: "Number outside the allowed range > 1-2"|Works as expected
+Press ENTER to play:|User press Enter|Moves to select level|Works as expected
+||User inputs anything + press Enter|Moves to select level|Works as expected
+Enter 1 for easy, 2  medium or, if you dare, 3 for hard level:|User inputs integer 1 + press Enter|Starts the game with easy level selected|Works as expected
+||User inputs integer 2 + press Enter|Starts the game with medium level selected|Works as expected
+||User inputs integer 3 + press Enter|Starts the game with hard level selected|Works as expected
+||User inputs anything other than integer + press Enter|Displays message: "Numbers only!"|Works as expected
+||User inputs any integer other than 1, 2 or 3 + press Enter|Displays message: "Number outside the allowed range > 1-3"|Works as expected
+Guess a number between 1 and 30:|User inputs integer between 1 and 30 + press Enter|If input = generated number:|
+|||displays generated number + communicates WIN result to user + prompts user to enter a name or nickname|Works as expected
+|||If input $\neq$ generated number and remaining guesses = 0:|
+|||displays generated number + communicates LOSE result to user + prompts option to start again or exit|Works as expected
+|||If input $\neq$ generated number and remaining guesses > 0 and not inside tried numbers: []:|
+|||adds input to tried numbers: [],|
+|||subtracts 1 guess from remaining guessed,|
+|||displays tried numbers: [] + hint + remaining guesses|Works as expected
+|||If input $\neq$ generated number and remaining guesses > 0 and inside tried numbers: []:|
+|||displays "You have tried this number already! Try again.",|
+|||ignores input|Works as expected
+||User inputs anything other than integer + press Enter|Displays message: "Numbers only!"|Works as expected
+||User inputs any integer not between 1 and game level range + press Enter|Displays message: "{integer} is outside the allowed range > 1-{game level range}"|Works as expected
+Please enter your name or nickname:|User inputs anything between 2 and 12 characters length (including blank spaces) + press Enter|Moves to display results screen|Works as expected
+||User inputs anything outside range between 2 and 12 characters length + press Enter|Moves to display results screen|Works as expected
+Press 1, if you want to start again or 2 to exit:|User inputs integer 1 + press Enter|Restarts the game|Works as expected
+||User inputs integer 2 + press Enter|Exits the game + displays message "You've left the game. Thank you for playing!"|Works as expected
+||User inputs anything other than integer + press Enter|Displays message: "Numbers only!"|Works as expected
+||User inputs any integer other than 1 or 2 + press Enter|Displays message: "Number outside the allowed range > 1-2"|Works as expected
 
 ### Bugs
 
