@@ -69,7 +69,7 @@ def show_instructions():
     correct input, and a break to stop showing instructions and run next
     function inside main().
     '''
-    print('\nYou can view instructions or just start playing!')
+    print('\nView instructions or just start playing!')
 
     while True:
         see_instructions = input(

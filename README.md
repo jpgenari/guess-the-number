@@ -8,14 +8,17 @@ The game works well as an alternative for a quick game play, adding some element
 
 [Guess the Number!](https://guess-the-number-p3-31510f7a135e.herokuapp.com/)
 
-![Responsive Mockup]()
+![Responsive Mockup](/assets/images/readme-am-i-responsive.png)
 
 ## Features
 
 ### Existing Features
 
-- Lorem Ipsum
-  - Lorem Ipsum
+- **Landing page**
+  - Opens a blank page showing a python terminal following Code Institute mock terminal on Heroku. The whole game runs inside the Python terminal.
+- **Welcome / View Instructions**
+  - The initial screen displayed on terminal will show a welcome message 
+
 
     ![Header]()
 
