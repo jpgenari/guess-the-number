@@ -1,17 +1,3 @@
-def game_name_ascii():
-    '''
-    Prints the welcome message to users when starting the
-    program
-    '''
-    game_name_art = '''
-  _____                   __  __         _  __           __           __
- / ___/_ _____ ___ ___   / /_/ /  ___   / |/ /_ ____ _  / /  ___ ____/ /
-/ (_ / // / -_|_-<(_-<  / __/ _ \/ -_) /    / // /  ' \/ _ \/ -_) __/_/
-\___/\_,_/\__/___/___/  \__/_//_/\__/ /_/|_/\_,_/_/_/_/_.__/\__/_/ (_)
-'''
-    print(game_name_art)
-
-
 def instructions_message():
     '''
     Prints the game instructions to users when starting the
