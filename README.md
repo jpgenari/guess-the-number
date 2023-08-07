@@ -8,8 +8,7 @@ The game works well as an alternative for a quick game play, adding some element
 
 [Guess the Number!](https://guess-the-number-p3-31510f7a135e.herokuapp.com/)
 
-![Responsive Mockup 1]()
-![Responsive Mockup 2]()
+![Responsive Mockup]()
 
 ## Features
 
