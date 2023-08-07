@@ -1,6 +1,6 @@
 # Guess the Number!
 
-Lorem Ipsum
+Loren ipsum Loren ipsum Loren ipsum
 
 [Guess the Number!](https://guess-the-number-p3-31510f7a135e.herokuapp.com/)
 
