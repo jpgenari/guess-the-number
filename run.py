@@ -7,9 +7,9 @@ import random
 from colorama import Fore, Style
 from pyfiglet import Figlet
 import pandas as pd
-import instructions
 import gspread
 from google.oauth2.service_account import Credentials
+import instructions
 
 f = Figlet(font='small')
 
