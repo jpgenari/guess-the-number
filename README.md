@@ -324,6 +324,7 @@ There are no unfixed bugs.
   - [How to print Dataframe in Python without Index?](https://www.geeksforgeeks.org/how-to-print-dataframe-in-python-without-index/);
   - [Python Absolute Value – Python abs Tutorial](https://www.freecodecamp.org/news/python-absolute-value-python-abs-tutorial/#:~:text=The%20abs()%20built%2Din,zero%20on%20the%20number%20line);
   - [Pandas Sort Values Tutorial](https://www.datacamp.com/tutorial/pandas-sort-values).
+- Debugging performed with support of [ChatGPT](https://chat.openai.com/).
 
 ### Acknowledgement
 
