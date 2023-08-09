@@ -65,7 +65,7 @@ View it on [Am I responsive?](https://ui.dev/amiresponsive?url=https://guess-the
 + If user opts to view instructions, they will be displayed on a new screen on the terminal containing instructions about the game and its hints - for the hints, they are based on the distance between tried numbers and number.
 + Upon pressing enter, users leave instructions and are led to next screen.
   
-  ![Instructions](/assets/images/readme-instructions.png)
+  ![Instructions](/assets/images/readme-instructions-new.png)
 
 ### Game level
 
