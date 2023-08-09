@@ -20,7 +20,7 @@ def instructions_message():
         )
     print(
         '- Hard -> lucky number between 1 and 120 with each guess worth\n'
-        '40 points (each you level up, difficulty and points double);\n'
+        '40 points (each level up, difficulty and points double);\n'
         )
     print('>> Hints:')
     print("* if Cold you're far from your number;")
