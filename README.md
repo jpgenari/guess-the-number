@@ -36,7 +36,7 @@ View it on [Am I responsive?](https://ui.dev/amiresponsive?url=https://guess-the
   + [Python Libraries and Modules](#python-libraries-and-modules "Python Libraries and Modules")
   + [Tools](#tools "Tools")
   + [Database](#database "Database")
-+ [DEPLOYMENT](#deployment "DEPLOYMENT")
++ [DEVELOPMENT AND DEPLOYMENT](#development-and-deployment "DEVELOPMENT AND DEPLOYMENT")
   + [Connecting Google Sheets with Python](#connecting-google-sheets-with-python "Connecting Google Sheets with Python")
   + [Deploying on Heroku](#deploying-on-heroku "Deploying on Heroku")
 + [CREDITS](#credits "CREDITS")
@@ -305,7 +305,7 @@ There are no unfixed bugs.
 + [Google Drive](https://www.google.com/drive/) - used to store the file containing the data base on the cloud
 + [Google Sheets](https://www.google.com/sheets/about/) - used to store and handle the data base
 
-## DEPLOYMENT
+## DEVELOPMENT AND DEPLOYMENT
 
 + Application is a terminal based game written in Python, running in the Code Institute mock terminal template from [python-essentials-template](https://github.com/Code-Institute-Org/python-essentials-template).
 + The live application is deployed using Heroku and can be accessed [here](https://guess-the-number-p3-31510f7a135e.herokuapp.com/).
