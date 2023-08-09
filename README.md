@@ -40,8 +40,8 @@ View it on [Am I responsive?](https://ui.dev/amiresponsive?url=https://guess-the
   + [Connecting Google Sheets with Python](#connecting-google-sheets-with-python "Connecting Google Sheets with Python")
   + [Deploying on Heroku](#deploying-on-heroku "Deploying on Heroku")
 + [CREDITS](#credits "CREDITS")
-  +[Content](#content "Content")
-  +[Acknowledgement](#acknowledgement "Acknowledgement")
+  + [Content](#content "Content")
+  + [Acknowledgement](#acknowledgement "Acknowledgement")
 
 ## FEATURES
 
