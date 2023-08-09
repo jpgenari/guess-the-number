@@ -113,7 +113,9 @@ Considering this project scope and design, as for user stories we contain only *
 
 ## DATA SCHEMA
 
-- Insert flow chart
+Flowchart created on [Lucidchart](https://www.lucidchart.com/pages/) displaying main user inputs and code output (actions). Validating data not including for better visual result, all user inputs pass through data validation to avoid program crashing.
+![Flowchart](/assets/images/readme-flowchart.png)
+View it on [Lucidchart](https://lucid.app/lucidchart/a2deff5c-9110-4e4d-b0c0-5145f1b1c9d0/edit?viewport_loc=-235%2C-65%2C3072%2C1504%2C0_0&invitationId=inv_04534744-09ec-48c2-9c81-e9cb23670608), login required.
 
 ## TESTING
 
