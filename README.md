@@ -37,8 +37,9 @@ View it on [Am I responsive?](https://ui.dev/amiresponsive?url=https://guess-the
   + [Tools](#tools "Tools")
   + [Database](#database "Database")
 + [DEVELOPMENT AND DEPLOYMENT](#development-and-deployment "DEVELOPMENT AND DEPLOYMENT")
-  + [Connecting Google Sheets with Python](#connecting-google-sheets-with-python "Connecting Google Sheets with Python")
-  + [Deploying on Heroku](#deploying-on-heroku "Deploying on Heroku")
+  + [Local](#local "Local")
+  + [Google Sheets with Python](#google-sheets-with-python "Google Sheets with Python")
+  + [Heroku](#heroku "Heroku")
 + [CREDITS](#credits "CREDITS")
   + [Content](#content "Content")
   + [Acknowledgement](#acknowledgement "Acknowledgement")
@@ -307,10 +308,24 @@ There are no unfixed bugs.
 
 ## DEVELOPMENT AND DEPLOYMENT
 
-+ Application is a terminal based game written in Python, running in the Code Institute mock terminal template from [python-essentials-template](https://github.com/Code-Institute-Org/python-essentials-template).
++ This terminal based game is written in Python, running in the Code Institute mock terminal template from [python-essentials-template](https://github.com/Code-Institute-Org/python-essentials-template), then cloned to local repository and developed locally with [VS Code](https://code.visualstudio.com/).
++ It uses a spreadsheet from [Google Sheets](https://www.google.com/sheets/about/) to store game results and then read and sort them out when displaying results to the users.
 + The live application is deployed using Heroku and can be accessed [here](https://guess-the-number-p3-31510f7a135e.herokuapp.com/).
 
-### Connecting Google Sheets with Python
+### Local
+
++ Steps to create crete new repository and clone it locally:
+  + Log in or sign up to [GitHub](https://github.com/);
+  + Go to [python-essentials-template](https://github.com/Code-Institute-Org/python-essentials-template);
+  + On the dropdown menu "Use this template" > select "Create a new repository";
+  + On the next page, in "Repository name" box input new repository name (optionally a description can be added) > select "Public" in order for repository to be publicly visible > click "Create repository";
+  + Open created repository > click on "Code" dropdown button > "Local" tab > "HTTPS" and copy it;
+  + Open Terminal on MacOS or Linux (if on Windows open Git Bash) or IDE terminal;
+  + In the terminal, change current directory to the location you wish to clone the repository;
+  + Then use command *git clone + copied HTTPS*, cloned  repository should cloned locally and synced with GitHub;
+  + From there, commands *git add .*, *git commit -m "description"* and *git push* to add, commit and push changes to GitHub repository.
+
+### Google Sheets with Python
 
 + Steps to connect Python to Google Sheets - used in development stage:
   + Sign in or create a [Google Account](https://accounts.google.com/v3/signin/identifier?continue=https%3A%2F%2Faccounts.google.com%2F&followup=https%3A%2F%2Faccounts.google.com%2F&ifkv=AXo7B7WsDhqcpaon49aRS2jMza1LPi7mXD7Mkj33SCOGJ5qL7NMLdgrhxg12s8ZG2haHibcGP6Jv&passive=1209600&flowName=GlifWebSignIn&flowEntry=ServiceLogin&dsh=S-83235363%3A1691449447247998);
@@ -336,7 +351,7 @@ There are no unfixed bugs.
   + Add libraries `google-auth` and `gspread` to the project using *pip install* and import them to the Python file where the code is placed;
   + Setup the SCOPE, CREDS, SCOPED_CREDS, GSPREAD_CLIENT and SHEET following [love-sandwiches-p5-sourcecode](https://github.com/Code-Institute-Solutions/love-sandwiches-p5-sourcecode/blob/master/01-getting-set-up/02-connecting-oto-our-api-with-python/run.py) and finish integration between Python and Google Sheets.
 
-### Deploying on Heroku
+### Heroku
 
 + Steps to deploy project on Heroku - valid for the Code Institute [python-essentials-template](https://github.com/Code-Institute-Org/python-essentials-template):
   + For the code to work properly in the provided template, before deployment it is necessary to add `\n` method, so the inputs can be captured;
