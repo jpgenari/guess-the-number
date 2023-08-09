@@ -322,7 +322,7 @@ There are no unfixed bugs.
   + Open created repository > click on "Code" dropdown button > "Local" tab > "HTTPS" and copy it;
   + Open Terminal on MacOS or Linux (if on Windows open Git Bash) or IDE terminal;
   + In the terminal, change current directory to the location you wish to clone the repository;
-  + Then use command *git clone + copied HTTPS*, cloned  repository should cloned locally and synced with GitHub;
+  + Then use command *git clone + copied HTTPS*, cloned  repository should cloned locally and synced with GitHub (as long as IDE and GitHub are linked for permissions);
   + From there, commands *git add .*, *git commit -m "description"* and *git push* to add, commit and push changes to GitHub repository.
 
 ### Google Sheets with Python
