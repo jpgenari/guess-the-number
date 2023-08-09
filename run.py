@@ -76,6 +76,7 @@ def show_instructions():
             '\nEnter 1 to view instructions and 2 to skip them:\n'
             )
         clear()
+        
         if validate_data(see_instructions):
             if int(see_instructions) == 1:
                 clear()
@@ -106,7 +107,6 @@ def user_level_choice():
             '\n'
             )
         clear()
-
         if validate_data(game_level):
             if 1 <= int(game_level) <= 3:
                 return int(game_level)
