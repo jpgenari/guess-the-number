@@ -76,7 +76,6 @@ def show_instructions():
             '\nEnter 1 to view instructions and 2 to skip them:\n'
             )
         clear()
-        
         if validate_data(see_instructions):
             if int(see_instructions) == 1:
                 clear()
@@ -148,7 +147,6 @@ def user_guessed_number(guess_range, incorrect_guesses):
     while True:
         guess = input(f'\nGuess a number between 1 and {guess_range}:\n')
         clear()
-
         if validate_data(guess):
             print('\n')
             game_name_ascii()
@@ -190,7 +188,6 @@ def play_again_or_exit():
             '\nPress 1, if you want to start again or 2 to exit:\n'
             )
         clear()
-
         if validate_data(play_again):
             print('\n')
             game_name_ascii()

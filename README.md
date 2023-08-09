@@ -25,8 +25,8 @@ View it on [Am I responsive?](https://ui.dev/amiresponsive?url=https://guess-the
   + [Features Left to Implement or Future Features](#features-left-to-implement-or-future-features "Features Left to Implement or Future Features")
 + [USER STORIES](#user-stories "USER STORIES")
 + [DATA SCHEMA](#data-schema "DATA SCHEMA")
-+ [TESTING](#testing "TESTING")
-  + [Validator Testing](#validator-testing "Validator Testing")
++ [VALIDATING AND TESTING](#validating-and-testing "VALIDATING AND TESTING")
+  + [Validator](#validator "Validator")
   + [Testing as a Table](#testing-as-a-table "Testing as a Table")
 + [BUGS](#bugs "BUGS")
   + [Solved bugs](#solved-bugs "Solved bugs")
@@ -36,13 +36,12 @@ View it on [Am I responsive?](https://ui.dev/amiresponsive?url=https://guess-the
   + [Python Libraries and Modules](#python-libraries-and-modules "Python Libraries and Modules")
   + [Tools](#tools "Tools")
   + [Database](#database "Database")
-+ [DEVELOPMENT & DEPLOYMENT](#development--deployment "DEVELOPMENT & DEPLOYMENT")
++ [DEPLOYMENT](#deployment "DEPLOYMENT")
   + [Connecting Google Sheets with Python](#connecting-google-sheets-with-python "Connecting Google Sheets with Python")
   + [Deploying on Heroku](#deploying-on-heroku "Deploying on Heroku")
 + [CREDITS](#credits "CREDITS")
   +[Content](#content "Content")
   +[Acknowledgement](#acknowledgement "Acknowledgement")
-  
 
 ## FEATURES
 
@@ -156,11 +155,11 @@ View it on [Lucidchart](https://lucid.app/lucidchart/a2deff5c-9110-4e4d-b0c0-514
 
 [Back to top](#guess-the-number "Back to top")
 
-## TESTING
+## VALIDATING AND TESTING
 
-** *The game should not work on mobile as it runs inside Code Institute mock terminal on Heroku. No accessibility or responsivity testing was applied as therefore, they are not needed.* **
+***The game should not work on mobile as it runs inside Code Institute mock terminal on Heroku. No accessibility or responsivity testing was applied as therefore, they are not needed.***
 
-### Validator Testing
+### Validator
 
 Python code has been tested and validated with [CI Python Linter](https://pep8ci.herokuapp.com/) and all errors have been removed from code.
 
@@ -222,7 +221,7 @@ Application did not break not matter inputs added and correct errors were displa
   + The bug was solved by adding the function to_numeric() to guarantee all results from column were converted into integers before being sorted.
   + Code example with bug:
 
-    ```
+    ```python
     def display_results(user_name, score):
         data = SHEET.worksheet('results').get_all_values()
         headers = data[0]
@@ -246,8 +245,10 @@ Application did not break not matter inputs added and correct errors were displa
         print(top_5.to_string(index=False))
         play_again_or_exit()
     ```
+
   + This string was added before sort.values() function to fix the bug:
-    ```
+
+    ```python
     data_frame['Scores'] = pd.to_numeric(data_frame['Scores'], errors='coerce')
     ```
 
@@ -258,7 +259,8 @@ Application did not break not matter inputs added and correct errors were displa
   + Upon some online research, a possible reason for the issue could be these libraries not installed (the project is developed using VS Code as IDE, running locally to avoid disruptions from online IDEs). Using *pip* commands in the terminal it was confirmed both libraries were installed, and, still, requirements.txt was not being updated as expected.
   + Some more research was made and the possible issue was pointed to the current installed libraries not being fully compatible with IDE with the application was running perfectly in terminals, both VS Code terminal and Mac OS terminal, however, requirements were not being updated.
   + In order to solve the bug and deploy a runnable application, the solution applied was to manually add the requirements to the requirements.txt using currently libraries version installed. Using pip commands to install libraries it was confirmed installation along side version, which were added to the requirements.txt file.
-  ```
+  
+  ```.txt
   pyfiglet==0.8.post1
   colorama==0.4.6
   ```
@@ -303,7 +305,7 @@ There are no unfixed bugs.
 + [Google Drive](https://www.google.com/drive/) - used to store the file containing the data base on the cloud
 + [Google Sheets](https://www.google.com/sheets/about/) - used to store and handle the data base
 
-## DEVELOPMENT & DEPLOYMENT
+## DEPLOYMENT
 
 + Application is a terminal based game written in Python, running in the Code Institute mock terminal template from [python-essentials-template](https://github.com/Code-Institute-Org/python-essentials-template).
 + The live application is deployed using Heroku and can be accessed [here](https://guess-the-number-p3-31510f7a135e.herokuapp.com/).
